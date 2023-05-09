@@ -4,9 +4,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
-  Navigate,
-  useLocation,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navigation from './components/Navigation';
