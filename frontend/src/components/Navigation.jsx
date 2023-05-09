@@ -6,11 +6,9 @@ const Navigation = () => (
         <Container>
         <Navbar.Brand as={Link} to="/">Slack chat</Navbar.Brand>
         <Nav className="mr-auto">
-          <Button as={Link} to="/public" variant='primary'>Log in</Button>
-          {/* <Nav.Link as={Link} to="/private">Private page</Nav.Link> */}
+          <Button as={Link} to="/login" variant='primary'>Log in</Button>
         </Nav>
         </Container>
-        {/* <AuthButton /> */}
       </Navbar> 
 )
 

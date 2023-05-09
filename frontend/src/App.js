@@ -10,34 +10,19 @@ import Navigation from './components/Navigation';
 import { Container } from 'react-bootstrap';
 import LoginPage from './components/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
+
 const App = () => (
   <div className='d-flex flex-column h-100'>
-    {/* // <AuthProvider> //  */}
     <Router>
       <Navigation />
       <Container fluid className='h-100'>
-      
-        
         <Routes>
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/" element={null} />
           <Route path="/login" element={<LoginPage />} />
-          
-          {/* <Route path="/public" element={<PublicPage />} />
-           */}
-          {/* <Route
-            path="/private"
-            element={(
-              <PrivateRoute>
-                <PrivatePage />
-              </PrivateRoute>
-            )}
-          /> */}
         </Routes>
       </Container>
-
     </Router>
-    {/* </AuthProvider> */}
   </div>
 );
 

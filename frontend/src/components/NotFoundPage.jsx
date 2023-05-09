@@ -1,6 +1,9 @@
+import { Image } from "react-bootstrap";
+
 const NotFoundPage = () => (
     <div>
-        <img src="notfoundimg.svg" alt="" />
+        <Image src="notfoundimg.svg"/>
+       
     </div>
 )
 
