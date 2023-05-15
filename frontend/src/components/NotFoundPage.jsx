@@ -3,13 +3,14 @@ import useAuth from "../hooks";
 
 const NotFoundPage = () => {
     const auth = useAuth();
-    const checkAuth = () => {
-        if (localStorage.getItem('userId')) {
-            auth.logIn();
-        } 
-    }
+
 
     useEffect(() => {
+        const checkAuth = () => {
+            if (localStorage.getItem('userId')) {
+                auth.logIn();
+            }
+        }
         checkAuth()
     }, [])
     return (
