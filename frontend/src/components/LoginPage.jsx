@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Container, Card, Col, Form, Row } from "react-bootstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import routes from "../routes/routes";
@@ -16,20 +16,20 @@ const Schema = Yup.object().shape({
 const LoginPage = () => {
   
     const navigate = useNavigate()
-    const location = useLocation();
     const auth = useAuth();
 
     
     useEffect(() => {
+        const checkAuth = () => {
+            if (localStorage.getItem('userId')) {
+                auth.logIn()
+                navigate('/', { replace: true})
+            } 
+        }
         checkAuth()
     }, [])
 
-    const checkAuth = () => {
-        if (localStorage.getItem('userId')) {
-            auth.logIn()
-            navigate('/', { replace: true})
-        } 
-    }
+    
     const formik = useFormik({
         initialValues: {
             username: '',

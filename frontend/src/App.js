@@ -5,7 +5,6 @@ import {
   Route,
   Navigate,
   Link,
-  useNavigate,
   useLocation,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -43,7 +42,6 @@ const PrivateRoute = ({ children }) => {
 
 const AuthButton = () => {
   const auth = useAuth();
-  const location = useLocation();
 
   return (
     auth.loggedIn
