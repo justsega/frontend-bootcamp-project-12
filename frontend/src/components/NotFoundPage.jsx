@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useAuth from "../hooks";
+import useAuth from "../hooks/AuthHook"; 
 
 const NotFoundPage = () => {
     const auth = useAuth();
@@ -12,15 +12,15 @@ const NotFoundPage = () => {
             }
         }
         checkAuth()
-    }, [])
+    }, [auth])
     return (
-        <div class="text-center">
+        <div className="text-center">
             <img
                 alt="Страница не найдена"
-                class="img-fluid h-25"
+                className="img-fluid h-25"
                 src="notfoundimg.svg" />
-            <h1 class="h4 text-muted">Страница не найдена</h1>
-            <p class="text-muted">Но вы можете перейти&nbsp;
+            <h1 className="h4 text-muted">Страница не найдена</h1>
+            <p className="text-muted">Но вы можете перейти&nbsp;
                 <a href="/">на главную страницу</a>
             </p>
         </div>)

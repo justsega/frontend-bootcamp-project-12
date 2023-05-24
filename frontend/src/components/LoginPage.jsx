@@ -5,11 +5,11 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import routes from "../routes/routes";
 import axios from 'axios';
-import useAuth from "../hooks";
+import useAuth from "../hooks/AuthHook"; 
 
 const Schema = Yup.object().shape({
-    username: Yup.string().min(2, 'Too short'),
-    password: Yup.string().min(6, 'Password should contains at least 6 symbols')
+    'username': Yup.string().min(2, 'Too short'),
+    'password': Yup.string().min(6, 'Password should contains at least 6 symbols')
 })
 
 

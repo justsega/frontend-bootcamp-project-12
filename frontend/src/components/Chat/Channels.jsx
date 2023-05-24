@@ -1,28 +1,87 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Col, Button, Image, Nav, Dropdown, ButtonGroup } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { selectors, actions as channelsActions } from "../../slices/channelsSlice";
+import cn from 'classnames';
+import { useState } from "react";
+import getModal from '../modals/index';
 
-const Channels = (props) => {
-    const { channels } = props.channels ?? [];
-    console.log(channels);
+const renderModal = ( modalInfo, closeModal) => {
+  if (!modalInfo.type) {
+    return null;
+  }
+  const Component = getModal(modalInfo.type);
+  return <Component handleClose={closeModal} id={modalInfo.id}/>;  
+};
 
-    return (
+const Channels = () => {
 
-        <Col className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
-            <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-                <b>Каналы</b>
-                <button className="p-0 text-primary btn btn-group-vertical">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
-                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"></path>
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path></svg>
-                    <span className="visually-hidden">+</span>
-                </button>
-            </div>
-            <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
-                {/* {channels.map((ch) => {
-                            <li key = {ch.id} className="nav-item w-100"><button type="button" className="w-100 rounded-0 text-start btn"><span className="me-1">#</span>{ch.name}</button></li>
-                        })} */}
-            </ul>
-        </Col>
-    );
+  const [modalInfo, setModalInfo] = useState({ type: null, id: null });
+  const showModal = (modalInfo, id = null) => setModalInfo({type: modalInfo, id: id});
+  const closeModal = () => setModalInfo({type: null, id: null});
+
+  const dispatch = useDispatch();
+  const channels = useSelector(selectors.selectAll);
+
+  const { activeChannelId } = useSelector((state) => state.channels)
+  const handleChangeActiveChannel = (id) => dispatch(channelsActions.activeChannelId(id))
+  
+
+  return (
+    <Col className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
+      <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
+        <b>Каналы</b>
+        <Button variant="" onClick={() => showModal('add') }  className="text-primary p-0 btn btn-group-vertical">
+          <Image src="plus-square.svg" alt="add channel" className="btn-primary" />
+          <span className="visually-hidden">+</span>
+        </Button>
+      </div>
+      <Nav as={'ul'} fill className="flex-column nav-pills px-2 mb-3 overflow-auto h-100 d-block" id="channels-box">
+        {channels.map((ch) => {
+          const classesOfMainButtons = cn(
+          'w-100 ', 
+          'rounded-0', 
+          'text-start', 
+          { 
+            'btn-secondary': ch.id === activeChannelId 
+          });
+          const classesOfControlButtons = cn(
+            'flex-grow-0', 
+            'dropdown-toggle', 
+            'dropdown-toggle-split', 
+            {
+              'btn-secondary': ch.id === activeChannelId 
+            })
+          const unremovableBtn = (
+            <Button 
+            variant="" 
+            onClick={() => handleChangeActiveChannel(ch.id)} 
+            className={classesOfMainButtons}>
+              <span className="me-1">#</span>
+              {ch.name}
+            </Button>
+          )
+          const removableBtn = (
+            <Dropdown as={ButtonGroup} className="d-flex">
+              <Button 
+              type="button" 
+              variant=""
+              onClick={() => handleChangeActiveChannel(ch.id)}
+              className={classesOfMainButtons}>
+              <span className="me-1">#</span>{ch.name}</Button>
+              <Dropdown.Toggle variant="" className={classesOfControlButtons} id="dropdown-basic" />
+              <Dropdown.Menu className="rounded-0">
+                <Dropdown.Item onClick={() => showModal('remove', ch.id)}>Удалить</Dropdown.Item>
+                <Dropdown.Item onClick={() => showModal('rename', ch.id)}>Переименовать</Dropdown.Item>
+              </Dropdown.Menu>
+             </Dropdown>
+          )
+          { return <Nav.Item as={'li'} key={ch.id} className="w-100">{ (!ch.removable) ? unremovableBtn : removableBtn }</Nav.Item> }
+        
+        })}
+        {renderModal(modalInfo, closeModal)}
+      </Nav>
+    </Col>
+  );
 }
 
 export default Channels;

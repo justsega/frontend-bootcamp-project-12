@@ -1,33 +1,35 @@
 import axios from "axios";
+import { getAuthHeader } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import routes from "../../routes/routes";
 import Channels from "./Channels";
 import Messages from "./Messages";
-
-
-const getAuthHeader = () => {
-  const userId = JSON.parse(localStorage.getItem('userId'));
-
-  if (userId && userId.token) {
-    return { Authorization: `Bearer ${userId.token}` };
-  }
-
-  return {};
-};
+import { useDispatch } from "react-redux";
+import { actions as channelsActions } from '../../slices/channelsSlice.js';
+import { actions as messagesActions } from '../../slices/messagesSlice.js';
+import { ToastContainer } from 'react-toastify';
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     (async () => {
-      await axios.get(routes.getData(), { headers: getAuthHeader() })
+      const { data } =  await axios.get(routes.getData(), { headers: getAuthHeader() });
+      dispatch(channelsActions.addChannels(data.channels));
+      dispatch(channelsActions.activeChannelId(data.currentChannelId));
+      dispatch(messagesActions.addMessages(data.messages))
+      
     })()
   }, [])
 
+
   return (
-    <Container className="h-100 my-4 overflow-hidden rounded shadow" >
+    <Container className="h-100 my-4 overflow-hidden rounded shadow">
       <Row className="h-100 bg-white flex-md-row">
-        <Channels channels={[]} />
+        <Channels />
         <Messages />
+        <ToastContainer />
       </Row>
     </Container>
 
