@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import LoginPage from './components/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
-import MainChatPage from './components/chat/MainChatPage';
+import MainChatPage from './components/MainChatPage';
 import SignUp from './components/SignUp';
 import { AuthProvider, AuthButton, PrivateRoute } from './providers/AuthProvider';
 import { SocketProvider } from './providers/SocketProvider';

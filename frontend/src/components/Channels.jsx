@@ -4,8 +4,8 @@ import {
 } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
-import { selectors, actions as channelsActions } from '../../slices/channelsSlice';
-import getModal from '../modals/index';
+import { selectors, actions as channelsActions } from '../slices/channelsSlice';
+import getModal from './modals/index';
 
 const renderModal = (modalInfo, closeModal) => {
   if (!modalInfo.type) {

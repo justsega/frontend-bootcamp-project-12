@@ -3,14 +3,14 @@ import axios from 'axios';
 import { Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import { getAuthHeader } from '../../providers/AuthProvider';
-import routes from '../../routes/routes';
+import { getAuthHeader } from '../providers/AuthProvider';
+import routes from '../routes/routes';
 import Channels from './Channels';
 import Messages from './Messages';
 // eslint-disable-next-line import/extensions
-import { actions as channelsActions } from '../../slices/channelsSlice.js';
+import { actions as channelsActions } from '../slices/channelsSlice.js';
 // eslint-disable-next-line import/extensions
-import { actions as messagesActions } from '../../slices/messagesSlice.js';
+import { actions as messagesActions } from '../slices/messagesSlice.js';
 
 function MainChatPage() {
   const dispatch = useDispatch();

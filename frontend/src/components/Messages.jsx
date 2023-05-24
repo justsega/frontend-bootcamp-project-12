@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Col } from 'react-bootstrap';
 import filter from 'leo-profanity';
-import { selectors } from '../../slices/messagesSlice';
-import useSocket from '../../hooks/SocketHook';
-import useAuth from '../../hooks/AuthHook';
+import { selectors } from '../slices/messagesSlice';
+import useSocket from '../hooks/SocketHook';
+import useAuth from '../hooks/AuthHook';
 
 function Messages() {
   filter.loadDictionary('ru');
