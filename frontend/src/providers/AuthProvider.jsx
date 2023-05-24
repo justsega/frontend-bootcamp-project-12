@@ -1,51 +1,54 @@
-import { useState } from "react";
-import useAuth from "../hooks/AuthHook";
-import AuthContext from "../contexts/AuthContext";
-import { useLocation, Navigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { React, useState, useMemo } from 'react';
+import { useLocation, Navigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import useAuth from '../hooks/AuthHook';
+import AuthContext from '../contexts/AuthContext';
 
+// eslint-disable-next-line react/prop-types
+export function AuthProvider({ children }) {
+  const [loggedIn, setLoggedIn] = useState(false);
 
-export const AuthProvider = ({ children }) => {
-    const [loggedIn, setLoggedIn] = useState(false);
-  
-    const logIn = () => setLoggedIn(true);
-    const logOut = () => {
-      localStorage.removeItem('userId');
-      setLoggedIn(false);
-    };
-    const getUserName = () => JSON.parse(localStorage.getItem('userId')).username;
-
-    return (
-      <AuthContext.Provider value={{ loggedIn, logIn, logOut, getUserName }}>
-        {children}
-      </AuthContext.Provider>
-    );
+  const logIn = () => setLoggedIn(true);
+  const logOut = () => {
+    localStorage.removeItem('userId');
+    setLoggedIn(false);
   };
+  const getUserName = () => JSON.parse(localStorage.getItem('userId')).username;
 
-export const AuthButton = () => {
-    const auth = useAuth();
-    return (
-      auth.loggedIn
-        ? <Button onClick={auth.logOut}>Выйти</Button>
-        : null
-    );
-  };
+  const memo = useMemo(() => ({
+    loggedIn, logIn, logOut, getUserName,
+  }));
+  return (
+    <AuthContext.Provider value={memo}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
 
-export const PrivateRoute = ({ children }) => {
-    const auth = useAuth();
-    const location = useLocation();
-  
-    return (
-      auth.loggedIn ? children : <Navigate to="/login" state={{ from: location }} />
-    );
-  };
+export function AuthButton() {
+  const auth = useAuth();
+  return (
+    auth.loggedIn
+      ? <Button onClick={auth.logOut}>Выйти</Button>
+      : null
+  );
+}
+
+// eslint-disable-next-line react/prop-types
+export function PrivateRoute({ children }) {
+  const auth = useAuth();
+  const location = useLocation();
+
+  return (
+    auth.loggedIn ? children : <Navigate to="/login" state={{ from: location }} />
+  );
+}
 
 export const getAuthHeader = () => {
-    const userId = JSON.parse(localStorage.getItem('userId'));
-  
-    if (userId && userId.token) {
-      return { Authorization: `Bearer ${userId.token}` };
-    }
-    return {};
-  };
-  
+  const userId = JSON.parse(localStorage.getItem('userId'));
+
+  if (userId && userId.token) {
+    return { Authorization: `Bearer ${userId.token}` };
+  }
+  return {};
+};
