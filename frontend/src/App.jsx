@@ -3,9 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
   Link,
-  useLocation,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Navbar, Nav } from 'react-bootstrap';
@@ -24,18 +22,18 @@ const App = () => (
           <Navbar expand="lg" bg="white" className='shadow-sm'>
             <Container>
               <Navbar.Brand as={Link} to="/">Hexlet chat</Navbar.Brand>
-                <Nav className="mr-auto"></Nav>
-                <AuthButton />
+              <Nav className="mr-auto"></Nav>
+              <AuthButton />
             </Container>
-          </Navbar> 
+          </Navbar>
           <Routes>
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/" element={(<PrivateRoute><MainPage /></PrivateRoute>)} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUp />} />
           </Routes>
-      </Router>
-    </SocketProvider>
+        </Router>
+      </SocketProvider>
     </AuthProvider>
   </div>
 );

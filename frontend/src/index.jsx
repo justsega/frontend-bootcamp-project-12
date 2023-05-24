@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import { Provider } from 'react-redux';
-import store from './slices/index.js';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
+import App from './App';
+import store from './slices/index';
 
 const rollbarConfig = {
   accessToken: 'c4397654be35404586d5b02225fffd87',
@@ -20,6 +20,5 @@ root.render(
         </Provider>
       </ErrorBoundary>
     </RollbarProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
-
