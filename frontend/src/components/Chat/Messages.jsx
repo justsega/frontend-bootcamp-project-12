@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectors, actions as messagesActions } from "../../slices/messagesSlice";
+import { selectors } from "../../slices/messagesSlice";
 import useSocket from "../../hooks/SocketHook";
 import { useFormik } from "formik";
 import useAuth from "../../hooks/AuthHook";
