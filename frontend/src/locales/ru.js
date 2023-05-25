@@ -63,5 +63,10 @@ export default {
         renameBtn: 'Отправить',
       },
     },
+    toast: {
+      added: 'Канал создан',
+      removed: 'Канал удалён',
+      renamed: 'Канал переименован',
+    },
   },
 };

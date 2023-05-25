@@ -16,7 +16,6 @@ function AddModal(props) {
   const socket = useSocket();
   const modalAddScheme = Yup.object().shape({
     channelName: Yup.string().min(3).max(20),
-
   });
 
   const formik = useFormik({
@@ -25,7 +24,7 @@ function AddModal(props) {
     },
     validationSchema: modalAddScheme,
     onSubmit: (values) => {
-      toast.success('Канал успешно добавлен', toastConfig);
+      toast.success(t('toast.added'), toastConfig);
       socket.addChannel(values.channelName);
       // eslint-disable-next-line no-param-reassign
       values.channelName = '';

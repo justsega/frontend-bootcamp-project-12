@@ -18,7 +18,7 @@ function RemoveModal(props) {
   const socket = useSocket();
   // eslint-disable-next-line no-shadow
   const handleRemove = (id) => {
-    toast.success('Канал успешно удален', toastConfig);
+    toast.success(t('toast.removed'), toastConfig);
     socket.removeChannel(id);
     if (id === currentId) {
       dispatch(channelsActions.activeChannelId(1));

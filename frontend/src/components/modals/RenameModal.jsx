@@ -28,7 +28,7 @@ function RenameModal(props) {
     },
     Schema,
     onSubmit: (values) => {
-      toast.success('Канал успешно переименован', toastConfig);
+      toast.success(t('toast.renamed'), toastConfig);
       socket.renameChannel(id, values.channelName);
       // eslint-disable-next-line no-param-reassign
       values.channelName = '';
