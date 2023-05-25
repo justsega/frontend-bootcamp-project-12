@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -25,6 +25,10 @@ function RemoveModal(props) {
     }
     handleClose();
   };
+  const removeBtn = useRef();
+  useEffect(() => {
+    removeBtn.current.focus();
+  }, []);
   return (
     <Modal
       show
@@ -39,7 +43,7 @@ function RemoveModal(props) {
         <p>{t('modals.removeModal.label')}</p>
         <div className="d-flex justify-content-end">
           <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.removeModal.cancelBtn')}</Button>
-          <Button type="submit" variant="danger" onClick={() => handleRemove(id)}>{t('modals.removeModal.removeBtn')}</Button>
+          <Button type="submit" ref={removeBtn} variant="danger" onClick={() => handleRemove(id)}>{t('modals.removeModal.removeBtn')}</Button>
         </div>
       </Modal.Body>
     </Modal>

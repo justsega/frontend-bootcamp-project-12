@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -32,6 +32,11 @@ function AddModal(props) {
       handleClose();
     },
   });
+
+  const inputField = useRef();
+  useEffect(() => {
+    inputField.current.select();
+  }, []);
   return (
     <Modal
       show
@@ -43,20 +48,26 @@ function AddModal(props) {
         <Modal.Title>{t('modals.addModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Control
-          isInvalid={formik.errors.channelName}
-          name="channelName"
-          id="channelName"
-          className="mb-2"
-          onChange={formik.handleChange}
-          value={formik.values.channelName}
-        />
-        <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.addModal.label')}</Form.Label>
-        <div name="invalid" className="invalid-feedback">{t('modals.addModal.error')}</div>
-        <div className="d-flex justify-content-end">
-          <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.addModal.cancelBtn')}</Button>
-          <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.addModal.addBtn')}</Button>
-        </div>
+        <Form onSubmit={formik.handleSubmit}>
+          <Form.Control
+            autoComplete="false"
+            isInvalid={formik.errors.channelName}
+            name="channelName"
+            id="channelName"
+            className="mb-2"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.channelName}
+            type="text"
+            ref={inputField}
+          />
+          <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.addModal.label')}</Form.Label>
+          <div name="invalid" className="invalid-feedback">{t('modals.addModal.error')}</div>
+          <div className="d-flex justify-content-end">
+            <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.addModal.cancelBtn')}</Button>
+            <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.addModal.addBtn')}</Button>
+          </div>
+        </Form>
       </Modal.Body>
     </Modal>
   );

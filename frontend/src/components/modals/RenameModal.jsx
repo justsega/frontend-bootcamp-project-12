@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -35,6 +35,11 @@ function RenameModal(props) {
       handleClose();
     },
   });
+  const inputField = useRef();
+  useEffect(() => {
+    inputField.current.select();
+  }, []);
+
   return (
     <Modal
       show
@@ -46,20 +51,23 @@ function RenameModal(props) {
         <Modal.Title>{t('modals.renameModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Control
-          name="channelName"
-          id="channelName"
-          className="mb-2"
-          autoFocus
-          onChange={formik.handleChange}
-          value={formik.values.channelName}
-        />
-        <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.renameModal.label')}</Form.Label>
-        <div name="invalid" className="invalid-feedback" />
-        <div className="d-flex justify-content-end">
-          <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.renameModal.cancelBtn')}</Button>
-          <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.renameModal.renameBtn')}</Button>
-        </div>
+        <Form>
+          <Form.Control
+            ref={inputField}
+            name="channelName"
+            id="channelName"
+            className="mb-2"
+            autoFocus
+            onChange={formik.handleChange}
+            value={formik.values.channelName}
+          />
+          <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.renameModal.label')}</Form.Label>
+          <div name="invalid" className="invalid-feedback" />
+          <div className="d-flex justify-content-end">
+            <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.renameModal.cancelBtn')}</Button>
+            <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.renameModal.renameBtn')}</Button>
+          </div>
+        </Form>
       </Modal.Body>
     </Modal>
   );
