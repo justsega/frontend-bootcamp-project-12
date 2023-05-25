@@ -1,9 +1,40 @@
+import { useFormik } from 'formik';
 import React from 'react';
 import {
   Button, Card, Container, Form, FormFloating, Image, Row,
 } from 'react-bootstrap';
+import * as Yup from 'yup';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 
 function SignUp() {
+  const { t } = useTranslation();
+  const signupValidation = Yup.object().shape({
+    username: Yup
+      .string()
+      .trim()
+      .min(3, t('signUp.errors.usernameLength'))
+      .max(20, t('signUp.errors.usernameLength'))
+      .required(t('signUp.errors.required')),
+    password: Yup
+      .string()
+      .trim()
+      .min(6, t('signUp.errors.passwordLength'))
+      .required(t('signUp.errors.required')),
+    confirmPassword: Yup
+      .string()
+      .trim()
+      .oneOf([Yup.ref('password'), null], t('signUp.errors.passConfirm'))
+      .required(t('signUp.errors.required')),
+  });
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: signupValidation,
+  });
   return (
     <Container fluid className="h-100">
       <Row className="justify-content-center align-content-center h-100">
@@ -14,51 +45,55 @@ function SignUp() {
                 <Image src="signupimg.jpg" className="rounded-circle" alt="Регистрация" />
               </div>
               <Form className="w-50">
-                <h1 className="text-center mb-4">Регистрация</h1>
+                <h1 className="text-center mb-4">{t('signUp.title')}</h1>
                 <FormFloating className="mb-3">
                   <Form.Control
-                    placeholder="От 3 до 20 символов"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    isInvalid={formik.errors.username && formik.touched.username}
+                    placeholder={t('signUp.username')}
                     name="username"
-                    autocomplete="username"
                     required=""
                     id="username"
-                    className="form-control is-invalid"
-                    value=""
+                    value={formik.values.username}
+                    autoFocus
                   />
-                  <Form.Label htmlFor="username">Имя пользователя</Form.Label>
-                  <div className="invalid-tooltip">Обязательное поле</div>
+                  <Form.Label htmlFor="username">{t('signUp.username')}</Form.Label>
+                  <Form.Control.Feedback tooltip type="invalid">{formik.errors.username}</Form.Control.Feedback>
                 </FormFloating>
 
                 <FormFloating className="mb-3">
                   <Form.Control
-                    placeholder="Не менее 6 символов"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    isInvalid={formik.errors.password && formik.touched.password}
+                    placeholder={t('signUp.password')}
                     name="password"
                     aria-describedby="passwordHelpBlock"
                     required=""
-                    autocomplete="new-password"
                     type="password"
                     id="password"
-                    className="form-control"
-                    value=""
+                    value={formik.values.password}
                   />
-                  <div className="invalid-tooltip">Обязательное поле</div>
-                  <Form.Label htmlFor="password">Пароль</Form.Label>
+                  <Form.Label htmlFor="password">{t('signUp.password')}</Form.Label>
+                  <Form.Control.Feedback tooltip type="invalid">{formik.errors.password}</Form.Control.Feedback>
                 </FormFloating>
                 <FormFloating className="mb-4">
                   <Form.Control
-                    placeholder="Пароли должны совпадать"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    isInvalid={formik.errors.confirmPassword && formik.touched.confirmPassword}
+                    placeholder={t('signUp.passwordConfirmation')}
                     name="confirmPassword"
                     required=""
-                    autocomplete="new-password"
                     type="password"
                     id="confirmPassword"
-                    className="form-control"
-                    value=""
+                    value={formik.values.confirmPassword}
                   />
-                  <div className="invalid-tooltip" />
-                  <Form.Label htmlFor="confirmPassword">Подтвердите пароль</Form.Label>
+                  <Form.Control.Feedback tooltip type="invalid">{formik.errors.confirmPassword}</Form.Control.Feedback>
+                  <Form.Label htmlFor="confirmPassword">{t('signUp.passwordConfirmation')}</Form.Label>
                 </FormFloating>
-                <Button variant="outline-primary" type="submit" className="w-100">Зарегистрироваться</Button>
+                <Button variant="outline-primary" type="submit" className="w-100">{t('signUp.signup')}</Button>
               </Form>
             </Card.Body>
           </Card>

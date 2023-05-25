@@ -1,20 +1,17 @@
 import React, { useEffect } from 'react';
 import {
-  Container, Card, Col, Form, Row,
+  Container, Card, Col, Form, Row, Button,
 } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import axios from 'axios';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import routes from '../routes/routes';
 import useAuth from '../hooks/AuthHook';
 
-const Schema = Yup.object().shape({
-  username: Yup.string().min(2, 'Too short'),
-  password: Yup.string().min(6, 'Password should contains at least 6 symbols'),
-});
-
 function LoginPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const auth = useAuth();
 
@@ -33,7 +30,6 @@ function LoginPage() {
       username: '',
       password: '',
     },
-    Schema,
     onSubmit: async (values) => {
       try {
         const response = await axios.post(routes.loginPath(), values);
@@ -41,6 +37,9 @@ function LoginPage() {
         auth.logIn();
         navigate('/', { replace: true });
       } catch (err) {
+        if (err.response.status === 401) {
+          formik.errors.failLogin = true;
+        }
         formik.setSubmitting(false);
         navigate('/login', { replace: true });
       }
@@ -57,40 +56,46 @@ function LoginPage() {
                 <Card.Img src="loginImg.jpeg" alt="Вход" />
               </Col>
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
-                <h1 className="text-center mb-4">Войти</h1>
+                <h1 className="text-center mb-4">{t('signIn.enter')}</h1>
                 <div className="form-floating mb-3">
                   <Form.Control
                     onChange={formik.handleChange}
+                    isInvalid={formik.errors.failLogin}
                     value={formik.values.username}
                     name="username"
                     autoComplete="username"
                     required
                     autoFocus
-                    placeholder="Ваш ник"
+                    placeholder={t('signIn.username')}
                     id="username"
                   />
-                  <Form.Label htmlFor="username">Ваш ник</Form.Label>
+                  <Form.Label htmlFor="username">{t('signIn.username')}</Form.Label>
                 </div>
                 <div className="form-floating mb-4">
                   <Form.Control
                     onChange={formik.handleChange}
+                    isInvalid={formik.errors.failLogin}
                     value={formik.values.password}
                     name="password"
                     autoComplete="password"
                     required
-                    placeholder="Ваш ник"
+                    placeholder={t('signIn.password')}
                     id="password"
                   />
-                  <Form.Label htmlFor="password">Пароль</Form.Label>
-                  <div className="invalid-tooltip active">Неверные имя пользователя или пароль</div>
+                  <Form.Label htmlFor="password">{t('signIn.password')}</Form.Label>
+                  <Form.Control.Feedback tooltip type="invalid">{t('signIn.errors.failLogin')}</Form.Control.Feedback>
+
                 </div>
-                <button type="submit" className="w-100 mb-3 btn btn-outline-primary">Войти</button>
+                <Button type="submit" variant="outline-primary" className="w-100 mb-3">{t('signIn.enter')}</Button>
               </Form>
             </Card.Body>
             <Card.Footer className="p-4">
               <div className="text-center">
-                <span>Нет аккаунта? </span>
-                <Link to="/signup">Регистрация</Link>
+                <span>
+                  {t('signIn.getAccount')}
+                  &nbsp;
+                </span>
+                <Link to="/signup">{t('signIn.registration')}</Link>
               </div>
             </Card.Footer>
           </Card>

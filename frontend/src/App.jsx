@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Navbar, Nav } from 'react-bootstrap';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import LoginPage from './components/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
 import MainChatPage from './components/MainChatPage';
@@ -15,6 +17,7 @@ import { AuthProvider, AuthButton, PrivateRoute } from './providers/AuthProvider
 import { SocketProvider } from './providers/SocketProvider';
 
 function App() {
+  const { t } = useTranslation();
   return (
     <div className="d-flex flex-column h-100">
       <AuthProvider>
@@ -22,7 +25,7 @@ function App() {
           <Router>
             <Navbar expand="lg" bg="white" className="shadow-sm">
               <Container>
-                <Navbar.Brand as={Link} to="/">Hexlet chat</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/">{t('mainTitle')}</Navbar.Brand>
                 <Nav className="mr-auto" />
                 <AuthButton />
               </Container>

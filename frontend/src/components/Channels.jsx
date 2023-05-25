@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {
   Col, Button, Image, Nav, Dropdown, ButtonGroup,
 } from 'react-bootstrap';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import { selectors, actions as channelsActions } from '../slices/channelsSlice';
@@ -16,6 +18,7 @@ const renderModal = (modalInfo, closeModal) => {
 };
 
 function Channels() {
+  const { t } = useTranslation();
   const [modalInfo, setModalInfo] = useState({ type: null, id: null });
   // eslint-disable-next-line no-shadow
   const showModal = (modalInfo, id = null) => setModalInfo({ type: modalInfo, id });
@@ -30,7 +33,7 @@ function Channels() {
   return (
     <Col className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-        <b>Каналы</b>
+        <b>{t('channelsPage.channelsTitle')}</b>
         <Button variant="" onClick={() => showModal('add')} className="text-primary p-0 btn btn-group-vertical">
           <Image src="plus-square.svg" alt="add channel" className="btn-primary" />
           <span className="visually-hidden">+</span>
@@ -39,6 +42,7 @@ function Channels() {
       <Nav as="ul" fill className="flex-column nav-pills px-2 mb-3 overflow-auto h-100 d-block" id="channels-box">
         {channels.map((ch) => {
           const classesOfMainButtons = cn(
+            'text-truncate',
             'w-100 ',
             'rounded-0',
             'text-start',
@@ -83,7 +87,7 @@ function Channels() {
             </Dropdown>
           );
           // eslint-disable-next-line no-lone-blocks
-          { return <Nav.Item as="li" key={ch.id} className="w-100">{ (!ch.removable) ? unremovableBtn : removableBtn }</Nav.Item>; }
+          { return <Nav.Item as="li" key={ch.id} className="w-100 text-truncate">{ (!ch.removable) ? unremovableBtn : removableBtn }</Nav.Item>; }
         })}
         {renderModal(modalInfo, closeModal)}
       </Nav>

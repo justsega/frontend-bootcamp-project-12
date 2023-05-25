@@ -1,6 +1,8 @@
 import { React, useState, useMemo } from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/AuthHook';
 import AuthContext from '../contexts/AuthContext';
 
@@ -26,10 +28,11 @@ export function AuthProvider({ children }) {
 }
 
 export function AuthButton() {
+  const { t } = useTranslation();
   const auth = useAuth();
   return (
     auth.loggedIn
-      ? <Button onClick={auth.logOut}>Выйти</Button>
+      ? <Button onClick={auth.logOut}>{t('logOutBtn')}</Button>
       : null
   );
 }

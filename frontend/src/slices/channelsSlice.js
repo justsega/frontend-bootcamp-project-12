@@ -17,6 +17,7 @@ const channelsSlice = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.activeChannelId = payload;
     },
+    getActiveChannelName: channelsAdapter.selectId,
 
   },
 });
