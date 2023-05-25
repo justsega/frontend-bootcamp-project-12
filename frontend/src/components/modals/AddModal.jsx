@@ -3,14 +3,18 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import useSocket from '../../hooks/SocketHook';
 import 'react-toastify/dist/ReactToastify.css';
+import toastConfig from '../../toastConfig';
 
 function AddModal(props) {
   // eslint-disable-next-line react/prop-types
   const { handleClose } = props;
+  const { t } = useTranslation();
   const socket = useSocket();
-  const Schema = Yup.object().shape({
+  const modalAddScheme = Yup.object().shape({
     channelName: Yup.string().min(3).max(20),
 
   });
@@ -19,18 +23,9 @@ function AddModal(props) {
     initialValues: {
       channelName: '',
     },
-    Schema,
+    validationSchema: modalAddScheme,
     onSubmit: (values) => {
-      toast.success('Канал успешно добавлен', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      });
+      toast.success('Канал успешно добавлен', toastConfig);
       socket.addChannel(values.channelName);
       // eslint-disable-next-line no-param-reassign
       values.channelName = '';
@@ -45,10 +40,11 @@ function AddModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title>Добавить канал</Modal.Title>
+        <Modal.Title>{t('modals.addModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form.Control
+          isInvalid={formik.errors.channelName}
           name="channelName"
           id="channelName"
           className="mb-2"
@@ -56,11 +52,11 @@ function AddModal(props) {
           onChange={formik.handleChange}
           value={formik.values.channelName}
         />
-        <Form.Label className="visually-hidden" htmlFor="channelName">Имя канала</Form.Label>
-        <div name="invalid" className="invalid-feedback" />
+        <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.addModal.label')}</Form.Label>
+        <div name="invalid" className="invalid-feedback">{t('modals.addModal.error')}</div>
         <div className="d-flex justify-content-end">
-          <Button variant="secondary" onClick={handleClose} className="me-2">Отменить</Button>
-          <Button type="submit" variant="primary" onClick={formik.handleSubmit}>Добавить</Button>
+          <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.addModal.cancelBtn')}</Button>
+          <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.addModal.addBtn')}</Button>
         </div>
       </Modal.Body>
     </Modal>

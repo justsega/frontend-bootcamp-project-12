@@ -3,12 +3,16 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import useSocket from '../../hooks/SocketHook';
 import { selectors } from '../../slices/channelsSlice';
 import 'react-toastify/dist/ReactToastify.css';
+import toastConfig from '../../toastConfig';
 
 function RenameModal(props) {
+  const { t } = useTranslation();
   // eslint-disable-next-line react/prop-types
   const { handleClose, id } = props;
   const channelToRename = useSelector(selectors.selectAll).find((channel) => channel.id === id);
@@ -24,16 +28,7 @@ function RenameModal(props) {
     },
     Schema,
     onSubmit: (values) => {
-      toast.success('Канал успешно переименован', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      });
+      toast.success('Канал успешно переименован', toastConfig);
       socket.renameChannel(id, values.channelName);
       // eslint-disable-next-line no-param-reassign
       values.channelName = '';
@@ -48,11 +43,10 @@ function RenameModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title>Переименовать канал</Modal.Title>
+        <Modal.Title>{t('modals.renameModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form.Control
-                    //  isInvalid="invalid"
           name="channelName"
           id="channelName"
           className="mb-2"
@@ -60,11 +54,11 @@ function RenameModal(props) {
           onChange={formik.handleChange}
           value={formik.values.channelName}
         />
-        <Form.Label className="visually-hidden" htmlFor="channelName">Имя канала</Form.Label>
+        <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.renameModal.label')}</Form.Label>
         <div name="invalid" className="invalid-feedback" />
         <div className="d-flex justify-content-end">
-          <Button variant="secondary" onClick={handleClose} className="me-2">Отменить</Button>
-          <Button type="submit" variant="primary" onClick={formik.handleSubmit}>Отправить</Button>
+          <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.renameModal.cancelBtn')}</Button>
+          <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.renameModal.renameBtn')}</Button>
         </div>
       </Modal.Body>
     </Modal>

@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { Col } from 'react-bootstrap';
 import filter from 'leo-profanity';
 import { selectors as messagesSelectors } from '../slices/messagesSlice';
-
 import useSocket from '../hooks/SocketHook';
 import useAuth from '../hooks/AuthHook';
 

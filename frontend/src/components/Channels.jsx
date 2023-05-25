@@ -87,7 +87,7 @@ function Channels() {
             </Dropdown>
           );
           // eslint-disable-next-line no-lone-blocks
-          { return <Nav.Item as="li" key={ch.id} className="w-100 text-truncate">{ (!ch.removable) ? unremovableBtn : removableBtn }</Nav.Item>; }
+          { return <Nav.Item as="li" key={ch.id} className="w-100">{ (!ch.removable) ? unremovableBtn : removableBtn }</Nav.Item>; }
         })}
         {renderModal(modalInfo, closeModal)}
       </Nav>

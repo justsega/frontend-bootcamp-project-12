@@ -32,11 +32,36 @@ export default {
         messages_few: '{{count}} сообщения',
         messages_many: '{{count}} сообщений',
       },
+      dropDown: {
+        delete: 'Удалить',
+        rename: 'Переименовать',
+      },
 
     },
     messagesPage: {
       inputPlaceholder: 'Введите сообщение...',
       sendBtn: 'Отправить',
+    },
+    modals: {
+      addModal: {
+        title: 'Добавить канал',
+        label: 'Имя канала',
+        cancelBtn: 'Отменить',
+        addBtn: 'Добавить',
+        error: 'От 3 до 20 символов',
+      },
+      removeModal: {
+        title: 'Удалить канал',
+        label: 'Уверены?',
+        cancelBtn: 'Отменить',
+        removeBtn: 'Удалить',
+      },
+      renameModal: {
+        title: 'Переименовать канал',
+        label: 'Имя канала',
+        cancelBtn: 'Отменить',
+        renameBtn: 'Отправить',
+      },
     },
   },
 };
