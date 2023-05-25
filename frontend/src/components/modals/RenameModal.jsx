@@ -71,6 +71,6 @@ const RenameModal = (props) => {
       </Modal.Body>
     </Modal>
   );
-}
+};
 
 export default RenameModal;

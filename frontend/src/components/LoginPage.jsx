@@ -103,6 +103,6 @@ const LoginPage = () => {
       </Row>
     </Container>
   );
-}
+};
 
 export default LoginPage;

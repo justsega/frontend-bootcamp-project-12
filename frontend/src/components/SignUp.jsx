@@ -104,6 +104,6 @@ const SignUp = () => {
       </Row>
     </Container>
   );
-}
+};
 
 export default SignUp;

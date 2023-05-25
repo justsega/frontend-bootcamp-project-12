@@ -19,13 +19,13 @@ export const AuthProvider = ({ children }) => {
 
   const memo = useMemo(() => ({
     loggedIn, logIn, logOut, getUserName,
-  }));
+  }), []);
   return (
     <AuthContext.Provider value={memo}>
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
 export const AuthButton = () => {
   const { t } = useTranslation();
@@ -35,7 +35,7 @@ export const AuthButton = () => {
       ? <Button onClick={auth.logOut}>{t('logOutBtn')}</Button>
       : null
   );
-}
+};
 
 // eslint-disable-next-line react/prop-types
 export const PrivateRoute = ({ children }) => {
@@ -45,7 +45,7 @@ export const PrivateRoute = ({ children }) => {
   return (
     auth.loggedIn ? children : <Navigate to="/login" state={{ from: location }} />
   );
-}
+};
 
 export const getAuthHeader = () => {
   const userId = JSON.parse(localStorage.getItem('userId'));

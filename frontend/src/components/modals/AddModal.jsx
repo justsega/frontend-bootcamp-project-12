@@ -70,6 +70,6 @@ const AddModal = (props) => {
       </Modal.Body>
     </Modal>
   );
-}
+};
 
 export default AddModal;

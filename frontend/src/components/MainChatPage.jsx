@@ -34,6 +34,6 @@ const MainChatPage = () => {
     </Container>
 
   );
-}
+};
 
 export default MainChatPage;

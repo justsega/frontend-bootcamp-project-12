@@ -66,6 +66,6 @@ const Messages = () => {
       </div>
     </Col>
   );
-}
+};
 
 export default Messages;

@@ -54,11 +54,11 @@ export const SocketProvider = ({ children }) => {
 
   const memo = useMemo(() => ({
     addChannel, removeChannel, addMessage, renameChannel,
-  }));
+  }), []);
 
   return (
     <SocketContext.Provider value={memo}>
       {children}
     </SocketContext.Provider>
   );
-}
+};
