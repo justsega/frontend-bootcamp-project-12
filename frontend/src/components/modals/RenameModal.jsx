@@ -11,7 +11,7 @@ import { selectors } from '../../slices/channelsSlice';
 import 'react-toastify/dist/ReactToastify.css';
 import toastConfig from '../../toastConfig';
 
-function RenameModal(props) {
+const RenameModal = (props) => {
   const { t } = useTranslation();
   // eslint-disable-next-line react/prop-types
   const { handleClose, id } = props;

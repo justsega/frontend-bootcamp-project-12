@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import routes from '../routes/routes';
 import useAuth from '../hooks/AuthHook';
 
-function LoginPage() {
+const LoginPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const auth = useAuth();
@@ -23,7 +23,7 @@ function LoginPage() {
       }
     };
     checkAuth();
-  }, []);
+  }, [auth, navigate]);
 
   const formik = useFormik({
     initialValues: {

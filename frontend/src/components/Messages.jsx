@@ -9,7 +9,7 @@ import { selectors as messagesSelectors } from '../slices/messagesSlice';
 import useSocket from '../hooks/SocketHook';
 import useAuth from '../hooks/AuthHook';
 
-function Messages() {
+const Messages = () => {
   const { t } = useTranslation();
   filter.loadDictionary('ru');
   filter.loadDictionary('en');

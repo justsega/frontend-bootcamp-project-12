@@ -1,7 +1,7 @@
 import { React, useEffect } from 'react';
 import useAuth from '../hooks/AuthHook';
 
-function NotFoundPage() {
+const NotFoundPage = () => {
   const auth = useAuth();
 
   useEffect(() => {

@@ -24,7 +24,7 @@ export const renameChannel = (id, name) => {
 };
 
 // eslint-disable-next-line react/prop-types
-export function SocketProvider({ children }) {
+export const SocketProvider = ({ children }) => {
   const dispatch = useDispatch();
   const messages = useSelector(messagesSelectors.selectAll);
 

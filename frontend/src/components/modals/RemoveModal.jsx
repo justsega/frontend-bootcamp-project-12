@@ -9,7 +9,7 @@ import { actions as channelsActions } from '../../slices/channelsSlice';
 import 'react-toastify/dist/ReactToastify.css';
 import toastConfig from '../../toastConfig';
 
-function RemoveModal(props) {
+const RemoveModal = (props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const currentId = useSelector((state) => state.channels.activeChannelId);

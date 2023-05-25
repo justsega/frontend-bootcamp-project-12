@@ -17,7 +17,7 @@ const renderModal = (modalInfo, closeModal) => {
   return <Component handleClose={closeModal} id={modalInfo.id} />;
 };
 
-function Channels() {
+const Channels = () => {
   const { t } = useTranslation();
   const [modalInfo, setModalInfo] = useState({ type: null, id: null });
   // eslint-disable-next-line no-shadow

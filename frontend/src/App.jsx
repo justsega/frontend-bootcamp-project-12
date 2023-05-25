@@ -16,7 +16,7 @@ import SignUp from './components/SignUp';
 import { AuthProvider, AuthButton, PrivateRoute } from './providers/AuthProvider';
 import { SocketProvider } from './providers/SocketProvider';
 
-function App() {
+const App = () => {
   const { t } = useTranslation();
   return (
     <div className="d-flex flex-column h-100">

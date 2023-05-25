@@ -12,7 +12,7 @@ import { actions as channelsActions } from '../slices/channelsSlice.js';
 // eslint-disable-next-line import/extensions
 import { actions as messagesActions } from '../slices/messagesSlice.js';
 
-function MainChatPage() {
+const MainChatPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function MainChatPage() {
       dispatch(channelsActions.activeChannelId(data.currentChannelId));
       dispatch(messagesActions.addMessages(data.messages));
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container className="h-100 my-4 overflow-hidden rounded shadow">

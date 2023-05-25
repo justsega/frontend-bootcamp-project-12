@@ -7,7 +7,7 @@ import useAuth from '../hooks/AuthHook';
 import AuthContext from '../contexts/AuthContext';
 
 // eslint-disable-next-line react/prop-types
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const logIn = () => setLoggedIn(true);
@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
   );
 }
 
-export function AuthButton() {
+export const AuthButton = () => {
   const { t } = useTranslation();
   const auth = useAuth();
   return (
@@ -38,7 +38,7 @@ export function AuthButton() {
 }
 
 // eslint-disable-next-line react/prop-types
-export function PrivateRoute({ children }) {
+export const PrivateRoute = ({ children }) => {
   const auth = useAuth();
   const location = useLocation();
 

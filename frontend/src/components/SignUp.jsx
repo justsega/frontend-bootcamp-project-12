@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
 
-function SignUp() {
+const SignUp = () => {
   const { t } = useTranslation();
   const signupValidation = Yup.object().shape({
     username: Yup
