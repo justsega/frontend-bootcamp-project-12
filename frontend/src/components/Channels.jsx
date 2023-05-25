@@ -79,7 +79,9 @@ function Channels() {
                 <span className="me-1">#</span>
                 {ch.name}
               </Button>
-              <Dropdown.Toggle variant="" className={classesOfControlButtons} id="dropdown-basic" />
+              <Dropdown.Toggle variant="" className={classesOfControlButtons} id="dropdown-basic">
+                <span className="visually-hidden">Управление каналом</span>
+              </Dropdown.Toggle>
               <Dropdown.Menu className="rounded-0">
                 <Dropdown.Item onClick={() => showModal('remove', ch.id)}>Удалить</Dropdown.Item>
                 <Dropdown.Item onClick={() => showModal('rename', ch.id)}>Переименовать</Dropdown.Item>
@@ -87,7 +89,7 @@ function Channels() {
             </Dropdown>
           );
           // eslint-disable-next-line no-lone-blocks
-          { return <Nav.Item as="li" key={ch.id} className="w-100">{ (!ch.removable) ? unremovableBtn : removableBtn }</Nav.Item>; }
+          { return <Nav.Item as="li" key={ch.id} className="w-100">{(!ch.removable) ? unremovableBtn : removableBtn}</Nav.Item>; }
         })}
         {renderModal(modalInfo, closeModal)}
       </Nav>
