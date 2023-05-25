@@ -34,6 +34,9 @@ function SignUp() {
       confirmPassword: '',
     },
     validationSchema: signupValidation,
+    onSubmit: (values) => {
+      console.log(`${values}   Ehuu`);
+    },
   });
   return (
     <Container fluid className="h-100">
@@ -44,7 +47,7 @@ function SignUp() {
               <div>
                 <Image src="signupimg.jpg" className="rounded-circle" alt="Регистрация" />
               </div>
-              <Form className="w-50">
+              <Form className="w-50" onSubmit={formik.handleSubmit}>
                 <h1 className="text-center mb-4">{t('signUp.title')}</h1>
                 <FormFloating className="mb-3">
                   <Form.Control

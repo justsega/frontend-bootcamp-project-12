@@ -48,7 +48,6 @@ function AddModal(props) {
           name="channelName"
           id="channelName"
           className="mb-2"
-          autoFocus
           onChange={formik.handleChange}
           value={formik.values.channelName}
         />
