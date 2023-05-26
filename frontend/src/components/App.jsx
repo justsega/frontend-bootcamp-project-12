@@ -9,12 +9,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
-import LoginPage from './components/LoginPage';
-import NotFoundPage from './components/NotFoundPage';
-import MainChatPage from './components/MainChatPage';
-import SignUp from './components/SignUp';
-import { AuthButton, PrivateRoute } from './providers/AuthProvider';
-import './style.css';
+import LoginPage from './loginPage/LoginPage';
+import NotFoundPage from './NotFoundPage';
+import MainChatPage from './MainChatPage';
+import SignUp from './SignUp';
+import { AuthButton, PrivateRoute } from '../providers/AuthProvider';
+import '../style.css';
 
 const App = () => {
   const { t } = useTranslation();

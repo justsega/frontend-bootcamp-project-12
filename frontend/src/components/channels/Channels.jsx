@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import {
   Col, Nav,
 } from 'react-bootstrap';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectors, actions as channelsActions } from '../slices/channelsSlice';
-import getModal from './modals/index';
+import { selectors, actions as channelsActions } from '../../slices/channelsSlice';
+import getModal from '../modals/index';
 import ChannelsHeader from './ChannelsHeader';
 import { UnRemovableBtn, RemovableBtn } from './ChannelsButtons';
 
@@ -21,6 +20,7 @@ const renderModal = (modalInfo, closeModal) => {
 const Channels = () => {
   const { t } = useTranslation();
   const [modalInfo, setModalInfo] = useState({ type: null, id: null });
+
   // eslint-disable-next-line no-shadow
   const showModal = (modalInfo, id = null) => setModalInfo({ type: modalInfo, id });
   const closeModal = () => setModalInfo({ type: null, id: null });

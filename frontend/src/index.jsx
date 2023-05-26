@@ -7,7 +7,7 @@ import i18n from 'i18next';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { initReactI18next } from 'react-i18next';
 import resources from './locales/index';
-import App from './App';
+import App from './components/App';
 import store from './slices/index';
 import { AuthProvider } from './providers/AuthProvider';
 import { SocketProvider } from './providers/SocketProvider';

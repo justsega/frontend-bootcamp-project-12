@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { getAuthHeader } from '../providers/AuthProvider';
 import routes from '../routes/routes';
-import Channels from './Channels';
-import Messages from './Messages';
+import Channels from './channels/Channels';
+import Messages from './messages/Messages';
 // eslint-disable-next-line import/extensions
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 // eslint-disable-next-line import/extensions

@@ -7,9 +7,9 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import routes from '../routes/routes';
-import useAuth from '../hooks/AuthHook';
-import getScheme from '../validationSchemes';
+import routes from '../../routes/routes';
+import useAuth from '../../hooks/AuthHook';
+import getScheme from '../../validationSchemes';
 import LoginPageForm from './LoginPageForm';
 
 const LoginPage = () => {

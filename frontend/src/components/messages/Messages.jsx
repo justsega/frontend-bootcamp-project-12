@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
 import { Col } from 'react-bootstrap';
 import filter from 'leo-profanity';
-import { selectors as messagesSelectors } from '../slices/messagesSlice';
-import useSocket from '../hooks/SocketHook';
-import useAuth from '../hooks/AuthHook';
+import { selectors as messagesSelectors } from '../../slices/messagesSlice';
+import useSocket from '../../hooks/SocketHook';
+import useAuth from '../../hooks/AuthHook';
 import MessagesHeader from './MessagesHeader';
 import MessagesBox from './MessagesBox';
 import MessagesInput from './MessagesInput';

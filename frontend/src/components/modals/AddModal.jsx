@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React from 'react';
+import { Modal } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -8,9 +8,9 @@ import useSocket from '../../hooks/SocketHook';
 import 'react-toastify/dist/ReactToastify.css';
 import toastConfig from '../../toastConfig';
 import getScheme from '../../validationSchemes';
+import AddModalForm from './AddModalForm';
 
 const AddModal = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { handleClose } = props;
   const { t } = useTranslation();
   const socket = useSocket();
@@ -23,16 +23,10 @@ const AddModal = (props) => {
     onSubmit: (values) => {
       toast.success(t('toast.added'), toastConfig);
       socket.addChannel(values.channelName);
-      // eslint-disable-next-line no-param-reassign
       formik.resetForm();
       handleClose();
     },
   });
-
-  const inputField = useRef();
-  useEffect(() => {
-    inputField.current.select();
-  }, []);
   return (
     <Modal
       show
@@ -44,29 +38,7 @@ const AddModal = (props) => {
         <Modal.Title>{t('modals.addModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={formik.handleSubmit}>
-          {/* <InputComponent ref={inputField} componentName="modals.addModal"
-          name="channelName" formik={formik} t={t} /> */}
-          <Form.Control
-            type="text"
-            autoFocus
-            autoComplete="false"
-            isInvalid={formik.errors.channelName}
-            name="channelName"
-            id="channelName"
-            className="mb-2"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.channelName}
-            ref={inputField}
-          />
-          <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.addModal.label')}</Form.Label>
-          <div name="invalid" className="invalid-feedback">{t('modals.addModal.error')}</div>
-          <div className="d-flex justify-content-end">
-            <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.addModal.cancelBtn')}</Button>
-            <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.addModal.addBtn')}</Button>
-          </div>
-        </Form>
+        <AddModalForm formik={formik} handleClose={handleClose} t={t} />
       </Modal.Body>
     </Modal>
   );

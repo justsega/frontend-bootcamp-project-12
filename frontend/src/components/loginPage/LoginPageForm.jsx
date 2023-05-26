@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, FormFloating, Button } from 'react-bootstrap';
-import InputComponent from './InputComponent';
+import InputComponent from '../InputComponent';
 
 const LoginPageForm = ({ formik, t }) => (
   <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
