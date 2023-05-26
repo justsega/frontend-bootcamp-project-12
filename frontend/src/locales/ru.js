@@ -5,7 +5,7 @@ export default {
       title: 'Регистрация',
       username: 'Имя пользователя',
       password: 'Пароль',
-      passwordConfirmation: 'Подтвердите пароль',
+      confirmPassword: 'Подтвердите пароль',
       signup: 'Зарегистрироваться',
       errors: {
         usernameLength: 'От 3 до 20 символов',
@@ -21,7 +21,7 @@ export default {
       registration: 'Регистрация',
       getAccount: 'Нет аккаунта?',
       errors: {
-        failLogin: 'Неверные имя пользователя или пароль',
+        password: 'Неверные имя пользователя или пароль',
       },
     },
     logOutBtn: 'Выйти',
@@ -44,6 +44,7 @@ export default {
     },
     modals: {
       addModal: {
+        channelName: '',
         title: 'Добавить канал',
         label: 'Имя канала',
         cancelBtn: 'Отменить',
@@ -61,6 +62,7 @@ export default {
         label: 'Имя канала',
         cancelBtn: 'Отменить',
         renameBtn: 'Отправить',
+        error: 'От 3 до 20 символов',
       },
     },
     toast: {

@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
 import useSocket from '../../hooks/SocketHook';
 import 'react-toastify/dist/ReactToastify.css';
 import toastConfig from '../../toastConfig';
+// import InputComponent from '../InputComponent';
 import getScheme from '../../validationSchemes';
 
 const AddModal = (props) => {
@@ -29,10 +31,10 @@ const AddModal = (props) => {
     },
   });
 
-  const inputField = useRef();
-  useEffect(() => {
-    inputField.current.select();
-  }, []);
+  // const inputField = useRef();
+  // useEffect(() => {
+  //   inputField.current.select();
+  // }, []);
   return (
     <Modal
       show
@@ -58,7 +60,8 @@ const AddModal = (props) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.channelName}
-            ref={inputField}
+
+            //  ref={inputField}
           />
           <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.addModal.label')}</Form.Label>
           <div name="invalid" className="invalid-feedback">{t('modals.addModal.error')}</div>

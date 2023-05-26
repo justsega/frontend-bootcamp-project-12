@@ -1,0 +1,7 @@
+.remove-dropdown-item {
+    --bs-dropdown-link-active-bg: #dc3545;
+}
+
+.rename-dropdown-item {
+    --bs-dropdown-link-active-bg: #6c757d;
+}

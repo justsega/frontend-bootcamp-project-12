@@ -9,6 +9,8 @@ import { initReactI18next } from 'react-i18next';
 import resources from './locales/index';
 import App from './App';
 import store from './slices/index';
+import { AuthProvider } from './providers/AuthProvider';
+import { SocketProvider } from './providers/SocketProvider';
 
 const rollbarConfig = {
   accessToken: 'c4397654be35404586d5b02225fffd87',
@@ -27,7 +29,11 @@ root.render(
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
         <Provider store={store}>
-          <App />
+          <AuthProvider>
+            <SocketProvider>
+              <App />
+            </SocketProvider>
+          </AuthProvider>
         </Provider>
       </ErrorBoundary>
     </RollbarProvider>

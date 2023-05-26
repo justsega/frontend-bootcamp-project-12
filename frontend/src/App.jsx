@@ -13,32 +13,29 @@ import LoginPage from './components/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
 import MainChatPage from './components/MainChatPage';
 import SignUp from './components/SignUp';
-import { AuthProvider, AuthButton, PrivateRoute } from './providers/AuthProvider';
-import { SocketProvider } from './providers/SocketProvider';
+import { AuthButton, PrivateRoute } from './providers/AuthProvider';
+import './style.css';
 
 const App = () => {
   const { t } = useTranslation();
   return (
     <div className="d-flex flex-column h-100">
-      <AuthProvider>
-        <SocketProvider>
-          <Router>
-            <Navbar expand="lg" bg="white" className="shadow-sm">
-              <Container>
-                <Navbar.Brand as={Link} to="/">{t('mainTitle')}</Navbar.Brand>
-                <Nav className="mr-auto" />
-                <AuthButton />
-              </Container>
-            </Navbar>
-            <Routes>
-              <Route path="*" element={<NotFoundPage />} />
-              <Route path="/" element={(<PrivateRoute><MainChatPage /></PrivateRoute>)} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignUp />} />
-            </Routes>
-          </Router>
-        </SocketProvider>
-      </AuthProvider>
+      <Router>
+        <Navbar expand="lg" bg="white" className="shadow-sm">
+          <Container>
+            <Navbar.Brand as={Link} to="/">{t('mainTitle')}</Navbar.Brand>
+            <Nav className="mr-auto" />
+            <AuthButton />
+          </Container>
+        </Navbar>
+        <Routes>
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/" element={(<PrivateRoute><MainChatPage /></PrivateRoute>)} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </Router>
+
     </div>
   );
 };
