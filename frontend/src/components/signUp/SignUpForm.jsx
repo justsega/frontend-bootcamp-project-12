@@ -1,18 +1,37 @@
 import { Form, Button } from 'react-bootstrap';
 import InputComponent from '../InputComponent';
 
+const fields = [
+  {
+    id: 1, name: 'username', type: 'text', moduleName: 'signUp', label: true, feedBack: true,
+  },
+  {
+    id: 2, name: 'password', type: 'password', moduleName: 'signUp', label: true, feedBack: true,
+  },
+  {
+    id: 3, name: 'confirmPassword', type: 'password', moduleName: 'signUp', label: true, feedBack: true,
+  },
+];
+
 const SignUpForm = ({ formik, t }) => (
   <Form className="w-50" onSubmit={formik.handleSubmit}>
     <h1 className="text-center mb-4">{t('signUp.title')}</h1>
-    <Form.Floating className="mb-3">
-      <InputComponent componentName="signUp" name="username" formik={formik} t={t} label feedBack />
-    </Form.Floating>
-    <Form.Floating className="mb-3">
-      <InputComponent componentName="signUp" name="password" type="password" formik={formik} t={t} label feedBack />
-    </Form.Floating>
-    <Form.Floating className="mb-4">
-      <InputComponent componentName="signUp" name="confirmPassword" type="password" formik={formik} t={t} label feedBack />
-    </Form.Floating>
+    {fields.map(({
+      name, type, moduleName, id,
+    }) => (
+      <Form.Floating className="mb-3">
+        <InputComponent
+          key={id}
+          componentName={moduleName}
+          name={name}
+          type={type}
+          formik={formik}
+          t={t}
+          label
+          feedBack
+        />
+      </Form.Floating>
+    ))}
     <Button type="submit" variant="outline-primary" className="w-100">{t('signUp.button')}</Button>
   </Form>
 );
