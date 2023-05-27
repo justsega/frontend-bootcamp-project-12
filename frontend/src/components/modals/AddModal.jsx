@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import { Modal } from 'react-bootstrap';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -32,18 +32,16 @@ const AddModal = (props) => {
       handleClose();
     },
   });
-  return <RenderAddModal handleClose={handleClose} t={t} formik={formik} />;
+  return (
+    <Modal show onHide={handleClose} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>{t('modals.addModal.title')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <AddModalForm formik={formik} handleClose={handleClose} t={t} />
+      </Modal.Body>
+    </Modal>
+  );
 };
-
-const RenderAddModal = ({ handleClose, t, formik }) => (
-  <Modal show onHide={handleClose} centered>
-    <Modal.Header closeButton>
-      <Modal.Title>{t('modals.addModal.title')}</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <AddModalForm formik={formik} handleClose={handleClose} t={t} />
-    </Modal.Body>
-  </Modal>
-);
 
 export default AddModal;
