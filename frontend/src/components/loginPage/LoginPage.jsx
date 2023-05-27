@@ -5,7 +5,6 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import routes from '../../routes/routes';
 import useAuth from '../../hooks/AuthHook';
 import LoginPageForm from './LoginPageForm';
 import makeRequest from '../../makeRequest';
@@ -32,9 +31,7 @@ const LoginPage = () => {
       faildLogin: false,
     },
     onSubmit: async (values) => {
-      const { faildLogin, ...data } = values;
-      const route = routes.loginPath();
-      await makeRequest(route, data, auth, navigate, formik, t);
+      await makeRequest('loginPath', values, auth, navigate, formik, t);
     },
 
   });

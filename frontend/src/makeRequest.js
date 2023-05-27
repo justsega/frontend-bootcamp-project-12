@@ -1,11 +1,16 @@
 import axios from 'axios';
+import routes from './routes/routes';
 
-const makeRequest = async (route, data, auth, navigate, formik, t) => {
+const makeRequest = async (routeType, values, auth, navigate, formik, t) => {
   try {
-    const r = await axios.post(route, data);
+    const { username, password } = values;
+    const route = routes[routeType]();
+    console.log(route);
+    const r = await axios.post(route, { username, password });
     localStorage.setItem('userId', JSON.stringify(r.data));
     auth.logIn();
     navigate('/', { replace: true });
+    console.log(r.data);
   } catch (err) {
     if (err.response.status === 409) {
       // eslint-disable-next-line no-param-reassign

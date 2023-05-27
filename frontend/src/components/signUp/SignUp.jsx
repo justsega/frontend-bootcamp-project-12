@@ -5,9 +5,7 @@ import {
 } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import routes from '../../routes/routes';
 import getScheme from '../../validationSchemes';
 import useAuth from '../../hooks/AuthHook';
 import SignUpForm from './SignUpForm';
@@ -25,9 +23,7 @@ const SignUp = () => {
     },
     validationSchema: getScheme.signUp(Yup, t),
     onSubmit: async (values) => {
-      const { confirmPassword, ...data } = values;
-      const route = routes.signUp();
-      await makeRequest(route, data, auth, navigate, formik, t);
+      await makeRequest('signUp', values, auth, navigate, formik, t);
     },
   });
   return (
