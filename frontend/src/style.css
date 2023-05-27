@@ -5,3 +5,7 @@
 .rename-dropdown-item {
     --bs-dropdown-link-active-bg: #6c757d;
 }
+
+.scroll-down {
+    overflow-y: scroll;
+}
