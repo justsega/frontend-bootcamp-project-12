@@ -15,7 +15,7 @@ const RenameModalForm = ({ formik, handleClose, t }) => (
       type="text"
     />
     <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.renameModal.label')}</Form.Label>
-    <Form.Control.Feedback type="invalid">{t('modals.renameModal.error')}</Form.Control.Feedback>
+    <Form.Control.Feedback type="invalid">{t('modals.errors')}</Form.Control.Feedback>
     <div className="d-flex justify-content-end">
       <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.renameModal.cancelBtn')}</Button>
       <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.renameModal.renameBtn')}</Button>

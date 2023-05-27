@@ -15,7 +15,7 @@ const AddModalForm = ({ formik, handleClose, t }) => (
       value={formik.values.channelName}
     />
     <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.addModal.label')}</Form.Label>
-    <Form.Control.Feedback className="invalid-feedback">{t('modals.addModal.error')}</Form.Control.Feedback>
+    <Form.Control.Feedback className="invalid-feedback">{t('modals.errors')}</Form.Control.Feedback>
     <div className="d-flex justify-content-end">
       <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.addModal.cancelBtn')}</Button>
       <Button variant="primary" onClick={formik.handleSubmit} type="submit">{t('modals.addModal.addBtn')}</Button>

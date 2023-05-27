@@ -45,13 +45,12 @@ export default {
       sendBtn: 'Отправить',
     },
     modals: {
+      errors: 'От 3 до 20 символов',
       addModal: {
-        channelName: '',
         title: 'Добавить канал',
         label: 'Имя канала',
         cancelBtn: 'Отменить',
         addBtn: 'Добавить',
-        error: 'От 3 до 20 символов',
       },
       removeModal: {
         title: 'Удалить канал',
@@ -64,7 +63,6 @@ export default {
         label: 'Имя канала',
         cancelBtn: 'Отменить',
         renameBtn: 'Отправить',
-        error: 'От 3 до 20 символов',
       },
     },
     toast: {

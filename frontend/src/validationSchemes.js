@@ -25,16 +25,12 @@ const getScheme = {
       password: Yup.string().trim(),
     })
   ),
-  modalAdd: (Yup, t) => (
+  modalsScheme: (Yup, t) => (
     Yup.object().shape({
       channelName: Yup.string().min(3, t('modals.addModal.error')).max(20, t('modals.addModal.error')),
     })
   ),
-  renameModal: (Yup, t) => (
-    Yup.object().shape({
-      channelName: Yup.string().min(3, t('modals.renameModal.error')).max(20, t('modals.renameModal.error')),
-    })
-  ),
+
 };
 
 export default getScheme;

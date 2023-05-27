@@ -23,7 +23,7 @@ const AddModal = (props) => {
     initialValues: {
       channelName: '',
     },
-    validationSchema: getScheme.modalAdd(Yup, t),
+    validationSchema: getScheme.modalsScheme(Yup, t),
     onSubmit: (values) => {
       toast.success(t('toast.added'), toastConfig);
       socket.addChannel(values.channelName);

@@ -28,7 +28,7 @@ const RenameModal = (props) => {
     initialValues: {
       channelName: channelToRename.name,
     },
-    validationSchema: getScheme.renameModal(Yup, t),
+    validationSchema: getScheme.modalsScheme(Yup, t),
     onSubmit: (values) => {
       toast.success(t('toast.renamed'), toastConfig);
       socket.renameChannel(id, values.channelName);
