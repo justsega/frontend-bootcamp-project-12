@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Modal } from 'react-bootstrap';
+// import { Modal } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { Modal } from 'react-bootstrap';
 import useSocket from '../../hooks/SocketHook';
 import 'react-toastify/dist/ReactToastify.css';
 import toastConfig from '../../toastConfig';
