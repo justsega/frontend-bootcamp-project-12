@@ -31,16 +31,18 @@ const AddModal = (props) => {
       handleClose();
     },
   });
-  return (
-    <Modal show onHide={handleClose} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>{t('modals.addModal.title')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <AddModalForm formik={formik} handleClose={handleClose} t={t} />
-      </Modal.Body>
-    </Modal>
-  );
+  return <RenderAddModal handleClose={handleClose} t={t} formik={formik} />;
 };
+
+const RenderAddModal = ({ handleClose, t, formik }) => (
+  <Modal show onHide={handleClose} centered>
+    <Modal.Header closeButton>
+      <Modal.Title>{t('modals.addModal.title')}</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <AddModalForm formik={formik} handleClose={handleClose} t={t} />
+    </Modal.Body>
+  </Modal>
+);
 
 export default AddModal;

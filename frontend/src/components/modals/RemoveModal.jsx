@@ -30,24 +30,30 @@ const RemoveModal = (props) => {
     removeBtn.current.focus();
   }, []);
   return (
-    <Modal
-      show
-      onHide={handleClose}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>{t('modals.removeModal.title')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <p>{t('modals.removeModal.label')}</p>
-        <div className="d-flex justify-content-end">
-          <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.removeModal.cancelBtn')}</Button>
-          <Button type="submit" ref={removeBtn} variant="danger" onClick={() => handleRemove(id)}>{t('modals.removeModal.removeBtn')}</Button>
-        </div>
-      </Modal.Body>
-    </Modal>
+    <RenderRemovableModal
+      handleClose={handleClose}
+      handleRemove={handleRemove}
+      t={t}
+      id={id}
+    />
   );
 };
+
+const RenderRemovableModal = ({
+  handleClose, handleRemove, t, id,
+}) => (
+  <Modal show onHide={handleClose} centered>
+    <Modal.Header closeButton>
+      <Modal.Title>{t('modals.removeModal.title')}</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <p>{t('modals.removeModal.label')}</p>
+      <div className="d-flex justify-content-end">
+        <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.removeModal.cancelBtn')}</Button>
+        <Button id="remove-btn" type="submit" variant="danger" onClick={() => handleRemove(id)}>{t('modals.removeModal.removeBtn')}</Button>
+      </div>
+    </Modal.Body>
+  </Modal>
+);
 
 export default RemoveModal;

@@ -37,21 +37,18 @@ const RenameModal = (props) => {
     },
   });
 
-  return (
-    <Modal
-      show
-      onHide={handleClose}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>{t('modals.renameModal.title')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <RenameModalForm formik={formik} handleClose={handleClose} t={t} />
-      </Modal.Body>
-    </Modal>
-  );
+  return <RenderRenameModal formik={formik} t={t} handleClose={handleClose} />;
 };
+
+const RenderRenameModal = ({ handleClose, formik, t }) => (
+  <Modal show onHide={handleClose} centered>
+    <Modal.Header closeButton>
+      <Modal.Title>{t('modals.renameModal.title')}</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <RenameModalForm formik={formik} handleClose={handleClose} t={t} />
+    </Modal.Body>
+  </Modal>
+);
 
 export default RenameModal;

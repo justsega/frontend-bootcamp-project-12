@@ -20,14 +20,11 @@ const renderModal = (modalInfo, closeModal) => {
 const Channels = () => {
   const { t } = useTranslation();
   const [modalInfo, setModalInfo] = useState({ type: null, id: null });
-
   // eslint-disable-next-line no-shadow
   const showModal = (modalInfo, id = null) => setModalInfo({ type: modalInfo, id });
   const closeModal = () => setModalInfo({ type: null, id: null });
-
   const dispatch = useDispatch();
   const channels = useSelector(selectors.selectAll);
-
   const { activeChannelId } = useSelector((state) => state.channels);
   const setCurrChannel = (id) => dispatch(channelsActions.activeChannelId(id));
 
