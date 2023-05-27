@@ -26,22 +26,24 @@ const SignUp = () => {
       await makeRequest('signUp', values, auth, navigate, formik, t);
     },
   });
-  return (
-    <Container fluid className="h-100">
-      <Row className="justify-content-center align-content-center h-100">
-        <Col xs={12} md={8} xxl={6}>
-          <Card className="shadow-sm">
-            <Card.Body className="d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
-              <div>
-                <Image src="signupimg.jpg" roundedCircle alt={t('signUp.title')} />
-              </div>
-              <SignUpForm formik={formik} t={t} />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
-  );
+  return <RenderSignUp formik={formik} t={t} />;
 };
+
+const RenderSignUp = ({ formik, t }) => (
+  <Container fluid className="h-100">
+    <Row className="justify-content-center align-content-center h-100">
+      <Col xs={12} md={8} xxl={6}>
+        <Card className="shadow-sm">
+          <Card.Body className="d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
+            <div>
+              <Image src="signupimg.jpg" roundedCircle alt={t('signUp.title')} />
+            </div>
+            <SignUpForm formik={formik} t={t} />
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+  </Container>
+);
 
 export default SignUp;

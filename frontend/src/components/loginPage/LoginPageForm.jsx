@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import InputComponent from '../InputComponent';
-// componentName, name, formik, t, type = 'text', isInvalid = name, label = null, feedBack = null,
 
 const fields = [
   {
@@ -19,19 +18,20 @@ const LoginPageForm = ({ formik, t }) => (
     {fields.map(({
       name, type, moduleName, label, isInvalid, feedBack, id,
     }) => (
-      <Form.Floating className="mb-3">
-        <InputComponent
-          key={id}
-          componentName={moduleName}
-          name={name}
-          type={type}
-          formik={formik}
-          t={t}
-          label={label}
-          feedBack={feedBack}
-          isInvalid={isInvalid}
-        />
-      </Form.Floating>
+      <React.Fragment key={id}>
+        <Form.Floating className="mb-3">
+          <InputComponent
+            componentName={moduleName}
+            name={name}
+            type={type}
+            formik={formik}
+            t={t}
+            label={label}
+            feedBack={feedBack}
+            isInvalid={isInvalid}
+          />
+        </Form.Floating>
+      </React.Fragment>
     ))}
 
     <Button type="submit" variant="outline-primary" className="w-100 mb-3">{t('signIn.enter')}</Button>

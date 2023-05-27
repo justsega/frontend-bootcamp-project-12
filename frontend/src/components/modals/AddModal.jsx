@@ -32,12 +32,7 @@ const AddModal = (props) => {
     },
   });
   return (
-    <Modal
-      show
-      onHide={handleClose}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
+    <Modal show onHide={handleClose} centered>
       <Modal.Header closeButton>
         <Modal.Title>{t('modals.addModal.title')}</Modal.Title>
       </Modal.Header>

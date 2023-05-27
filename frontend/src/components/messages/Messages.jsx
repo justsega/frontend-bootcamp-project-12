@@ -21,7 +21,6 @@ const Messages = () => {
   filter.loadDictionary('ru');
   filter.loadDictionary('en');
   const username = useAuth().getUserName();
-
   const { activeChannelId } = useSelector((state) => state.channels);
   const activeChannel = useSelector(
     (state) => channelsSelectors.selectById(state, activeChannelId),
@@ -40,14 +39,25 @@ const Messages = () => {
     },
   });
   return (
-    <Col className="col p-0 h-100">
-      <div className="d-flex flex-column h-100">
-        <MessagesHeader messages={messages} t={t} activeChannelName={activeChannelName} />
-        <MessagesBox messages={messages} />
-        <MessagesInput formik={formik} t={t} />
-      </div>
-    </Col>
+    <RenderMessages
+      t={t}
+      messages={messages}
+      activeChannelName={activeChannelName}
+      formik={formik}
+    />
   );
 };
+
+const RenderMessages = ({
+  t, messages, activeChannelName, formik,
+}) => (
+  <Col className="col p-0 h-100">
+    <div className="d-flex flex-column h-100">
+      <MessagesHeader messages={messages} t={t} activeChannelName={activeChannelName} />
+      <MessagesBox messages={messages} />
+      <MessagesInput formik={formik} t={t} />
+    </div>
+  </Col>
+);
 
 export default Messages;

@@ -32,38 +32,52 @@ const Channels = () => {
   const setCurrChannel = (id) => dispatch(channelsActions.activeChannelId(id));
 
   return (
-    <Col className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
-      <ChannelsHeader showModal={showModal} t={t} />
-      <Nav as="ul" fill className="flex-column nav-pills px-2 mb-3 overflow-auto h-100 d-block" id="channels-box">
-        {channels.map((ch) => {
-          const variant = ch.id === activeChannelId ? 'secondary' : null;
-          return (
-            <Nav.Item as="li" key={ch.id} className="w-100">
-              {!ch.removable
-                ? (
-                  <UnRemovableBtn
-                    name={ch.name}
-                    setCurrChannel={setCurrChannel}
-                    id={ch.id}
-                    variant={variant}
-                  />
-                )
-                : (
-                  <RemovableBtn
-                    name={ch.name}
-                    setCurrChannel={setCurrChannel}
-                    id={ch.id}
-                    variant={variant}
-                    showModal={showModal}
-                  />
-                )}
-            </Nav.Item>
-          );
-        })}
-        {renderModal(modalInfo, closeModal)}
-      </Nav>
-    </Col>
+    <RenderChannels
+      showModal={showModal}
+      t={t}
+      channels={channels}
+      activeChannelId={activeChannelId}
+      setCurrChannel={setCurrChannel}
+      modalInfo={modalInfo}
+      closeModal={closeModal}
+    />
   );
 };
+
+const RenderChannels = ({
+  showModal, t, channels, activeChannelId, setCurrChannel, modalInfo, closeModal,
+}) => (
+  <Col className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
+    <ChannelsHeader showModal={showModal} t={t} />
+    <Nav as="ul" fill className="flex-column nav-pills px-2 mb-3 overflow-auto h-100 d-block" id="channels-box">
+      {channels.map((ch) => {
+        const variant = ch.id === activeChannelId ? 'secondary' : null;
+        return (
+          <Nav.Item as="li" key={ch.id} className="w-100">
+            {!ch.removable
+              ? (
+                <UnRemovableBtn
+                  name={ch.name}
+                  setCurrChannel={setCurrChannel}
+                  id={ch.id}
+                  variant={variant}
+                />
+              )
+              : (
+                <RemovableBtn
+                  name={ch.name}
+                  setCurrChannel={setCurrChannel}
+                  id={ch.id}
+                  variant={variant}
+                  showModal={showModal}
+                />
+              )}
+          </Nav.Item>
+        );
+      })}
+      {renderModal(modalInfo, closeModal)}
+    </Nav>
+  </Col>
+);
 
 export default Channels;
