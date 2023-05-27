@@ -22,15 +22,9 @@ export const RemovableBtn = ({
   const { t } = useTranslation();
   return (
     <Dropdown as={ButtonGroup} className="d-flex">
-      <Button
-        type="button"
-        variant={variant}
-        onClick={() => setCurrChannel(id)}
-        className="text-truncate w-100 rounded-0 text-start"
-      >
-        <span className="me-1">#</span>
+      <UnRemovableBtn name={name} variant={variant} setCurrChannel={setCurrChannel} id={id}>
         {name}
-      </Button>
+      </UnRemovableBtn>
       <Dropdown.Toggle
         variant={variant}
         className="flex-grow-0 dropdown-toggle dropdown-toggle-split"
