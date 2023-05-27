@@ -11,7 +11,13 @@ const channelsSlice = createSlice({
   reducers: {
     addChannels: channelsAdapter.addMany,
     addChannel: channelsAdapter.addOne,
-    removeChannel: channelsAdapter.removeOne,
+    removeChannel: (state, { payload }) => {
+      channelsAdapter.removeOne(state, payload);
+      if (state.activeChannelId === payload) {
+        // eslint-disable-next-line no-param-reassign
+        state.activeChannelId = 1;
+      }
+    },
     updateChannel: channelsAdapter.updateOne,
     activeChannelId: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign

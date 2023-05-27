@@ -6,7 +6,6 @@ const AddModalForm = ({ formik, handleClose, t }) => (
   <Form onSubmit={formik.handleSubmit}>
     <Form.Control
       type="text"
-      autoFocus
       autoComplete="false"
       isInvalid={formik.errors.channelName}
       name="channelName"
@@ -17,6 +16,7 @@ const AddModalForm = ({ formik, handleClose, t }) => (
       value={formik.values.channelName}
     />
     <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.addModal.label')}</Form.Label>
+    <Form.Control.Feedback className="invalid-feedback">{t('modals.addModal.error')}</Form.Control.Feedback>
     <div name="invalid" className="invalid-feedback">{t('modals.addModal.error')}</div>
     <div className="d-flex justify-content-end">
       <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.addModal.cancelBtn')}</Button>
@@ -24,10 +24,4 @@ const AddModalForm = ({ formik, handleClose, t }) => (
     </div>
   </Form>
 );
-
 export default AddModalForm;
-
-// const inputField = useRef();
-//   useEffect(() => {
-//     inputField.current.select();
-//   }, []);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,6 +11,10 @@ import getScheme from '../../validationSchemes';
 import AddModalForm from './AddModalForm';
 
 const AddModal = (props) => {
+  useEffect(() => {
+    const inputField = document.getElementById('channelName');
+    inputField.focus();
+  });
   const { handleClose } = props;
   const { t } = useTranslation();
   const socket = useSocket();

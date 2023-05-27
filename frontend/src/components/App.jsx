@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import LoginPage from './loginPage/LoginPage';
 import NotFoundPage from './NotFoundPage';
 import MainChatPage from './MainChatPage';
-import SignUp from './SignUp';
+import SignUp from './signUp/SignUp';
 import { AuthButton, PrivateRoute } from '../providers/AuthProvider';
 import '../style.css';
 

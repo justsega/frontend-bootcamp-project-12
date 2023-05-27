@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Modal } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
@@ -11,8 +11,13 @@ import { selectors } from '../../slices/channelsSlice';
 import 'react-toastify/dist/ReactToastify.css';
 import toastConfig from '../../toastConfig';
 import getScheme from '../../validationSchemes';
+import RenameModalForm from './RenameModalForm';
 
 const RenameModal = (props) => {
+  useEffect(() => {
+    const inputField = document.getElementById('channelName');
+    inputField.focus();
+  }, []);
   const { handleClose, id } = props;
   const { t } = useTranslation();
 
@@ -31,10 +36,6 @@ const RenameModal = (props) => {
       handleClose();
     },
   });
-  const inputField = useRef();
-  useEffect(() => {
-    inputField.current.select();
-  }, []);
 
   return (
     <Modal
@@ -47,26 +48,7 @@ const RenameModal = (props) => {
         <Modal.Title>{t('modals.renameModal.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
-          <Form.Control
-            autoComplete="false"
-            isInvalid={formik.errors.channelName}
-            name="channelName"
-            id="channelName"
-            className="mb-2"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.channelName}
-            type="text"
-            ref={inputField}
-          />
-          <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.renameModal.label')}</Form.Label>
-          <div name="invalid" className="invalid-feedback">{t('modals.renameModal.error')}</div>
-          <div className="d-flex justify-content-end">
-            <Button variant="secondary" onClick={handleClose} className="me-2">{t('modals.renameModal.cancelBtn')}</Button>
-            <Button type="submit" variant="primary" onClick={formik.handleSubmit}>{t('modals.renameModal.renameBtn')}</Button>
-          </div>
-        </Form>
+        <RenameModalForm formik={formik} handleClose={handleClose} t={t} />
       </Modal.Body>
     </Modal>
   );

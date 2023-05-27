@@ -1,9 +1,12 @@
 import { React, useEffect } from 'react';
+import { Image } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import useAuth from '../hooks/AuthHook';
 
 const NotFoundPage = () => {
   const auth = useAuth();
-
+  const { t } = useTranslation();
   useEffect(() => {
     const checkAuth = () => {
       if (localStorage.getItem('userId')) {
@@ -14,15 +17,16 @@ const NotFoundPage = () => {
   }, [auth]);
   return (
     <div className="text-center">
-      <img
-        alt="Страница не найдена"
+      <Image
+        alt={t('notFoundPage.title1')}
         className="img-fluid h-25"
         src="notfoundimg.svg"
       />
-      <h1 className="h4 text-muted">Страница не найдена</h1>
+      <h1 className="h4 text-muted">{t('notFoundPage.title1')}</h1>
       <p className="text-muted">
-        Но вы можете перейти&nbsp;
-        <a href="/">на главную страницу</a>
+        {t('notFoundPage.title2')}
+&nbsp;
+        <Link to="/">{t('notFoundPage.toRegister')}</Link>
       </p>
     </div>
   );

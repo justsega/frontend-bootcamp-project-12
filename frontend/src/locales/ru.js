@@ -6,12 +6,13 @@ export default {
       username: 'Имя пользователя',
       password: 'Пароль',
       confirmPassword: 'Подтвердите пароль',
-      signup: 'Зарегистрироваться',
+      button: 'Зарегистрироваться',
       errors: {
         usernameLength: 'От 3 до 20 символов',
         passwordLength: 'Не менее 6 символов',
         passConfirm: 'Пароли должны совпадать',
         required: 'Обязательное поле',
+        alreadyExist: 'Такой пользователь уже существует',
       },
     },
     signIn: {
@@ -33,6 +34,7 @@ export default {
         messages_many: '{{count}} сообщений',
       },
       dropDown: {
+        controlLabel: 'Управление каналом',
         delete: 'Удалить',
         rename: 'Переименовать',
       },
@@ -69,6 +71,11 @@ export default {
       added: 'Канал создан',
       removed: 'Канал удалён',
       renamed: 'Канал переименован',
+    },
+    notFoundPage: {
+      title1: 'Страница не найдена',
+      title2: 'Но вы можете перейти',
+      toRegister: 'на главную страницу',
     },
   },
 };

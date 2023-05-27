@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import {
-  Container, Card, Col, Row,
+  Container, Card, Col, Row, Image,
 } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import * as Yup from 'yup';
+
 import routes from '../../routes/routes';
 import useAuth from '../../hooks/AuthHook';
-import getScheme from '../../validationSchemes';
+
 import LoginPageForm from './LoginPageForm';
 
 const LoginPage = () => {
@@ -31,21 +31,20 @@ const LoginPage = () => {
     initialValues: {
       username: '',
       password: '',
+      faildLogin: false,
     },
-    validationSchema: getScheme.login(Yup),
+    // validationSchema: getScheme.login(Yup),
     onSubmit: async (values) => {
+      const { faildLogin, ...data } = values;
       try {
-        const response = await axios.post(routes.loginPath(), values);
-        localStorage.setItem('userId', JSON.stringify(response.data));
+        const r = await axios.post(routes.loginPath(), data);
+        localStorage.setItem('userId', JSON.stringify(r.data));
         auth.logIn();
         navigate('/', { replace: true });
       } catch (err) {
         if (err.response.status === 401) {
-          formik.errors.username = true;
-          formik.errors.password = t('signIn.errors.password');
+          formik.errors.faildLogin = t('signIn.errors.password');
         }
-        formik.setSubmitting(false);
-        navigate('/login', { replace: true });
       }
     },
 
@@ -53,20 +52,20 @@ const LoginPage = () => {
   return (
     <Container fluid className="h-100">
       <Row className="justify-content-center align-content-center h-100">
-        <Col className="col-12" md={8} xxl={6}>
+        <Col xs={12} md={8} xxl={6}>
           <Card className="shadow-sm">
             <Card.Body className="row p-5">
-              <Col md="6" className="col-12 d-flex align-items-center justify-content-center">
-                <Card.Img src="loginImg.jpeg" alt="Вход" />
+              <Col xs={12} md={6} className="d-flex align-items-center justify-content-center">
+                <Image src="loginImg.jpeg" roundedCircle alt={t('signIn.enter')} />
               </Col>
               <LoginPageForm formik={formik} t={t} />
             </Card.Body>
             <Card.Footer className="p-4">
-              <Card.Text className="text-center">
-                {t('signIn.getAccount')}
-                  &nbsp;
+              <div className="text-center">
+                <span>{t('signIn.getAccount')}</span>
+                &nbsp;
                 <Link to="/signup">{t('signIn.registration')}</Link>
-              </Card.Text>
+              </div>
             </Card.Footer>
           </Card>
         </Col>

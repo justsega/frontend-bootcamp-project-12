@@ -21,8 +21,8 @@ const getScheme = {
   ),
   login: (Yup) => (
     Yup.object().shape({
-      username: Yup.string(),
-      password: Yup.string(),
+      username: Yup.string().trim(),
+      password: Yup.string().trim(),
     })
   ),
   modalAdd: (Yup, t) => (
