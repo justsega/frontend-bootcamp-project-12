@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -25,9 +25,9 @@ const RemoveModal = (props) => {
     }
     handleClose();
   };
-  const removeBtn = useRef();
   useEffect(() => {
-    removeBtn.current.focus();
+    const removeBtn = document.getElementById('remove-btn');
+    removeBtn.focus();
   }, []);
   return (
     <RenderRemovableModal
