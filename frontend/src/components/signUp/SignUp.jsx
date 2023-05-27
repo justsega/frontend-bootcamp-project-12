@@ -5,12 +5,13 @@ import {
 } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../routes/routes';
 import getScheme from '../../validationSchemes';
 import useAuth from '../../hooks/AuthHook';
 import SignUpForm from './SignUpForm';
+import makeRequest from '../../makeRequest';
 
 const SignUp = () => {
   const { t } = useTranslation();
@@ -25,16 +26,8 @@ const SignUp = () => {
     validationSchema: getScheme.signUp(Yup, t),
     onSubmit: async (values) => {
       const { confirmPassword, ...data } = values;
-      try {
-        const r = await axios.post(routes.signUp(), data);
-        localStorage.setItem('userId', JSON.stringify(r.data));
-        auth.logIn();
-        navigate('/', { replace: true });
-      } catch (err) {
-        if (err.response.status === 409) {
-          formik.errors.confirmPassword = t('signUp.errors.alreadyExist');
-        }
-      }
+      const route = routes.signUp();
+      await makeRequest(route, data, auth, navigate, formik, t);
     },
   });
   return (

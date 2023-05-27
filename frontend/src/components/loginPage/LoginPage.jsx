@@ -4,13 +4,11 @@ import {
 } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-
 import routes from '../../routes/routes';
 import useAuth from '../../hooks/AuthHook';
-
 import LoginPageForm from './LoginPageForm';
+import makeRequest from '../../makeRequest';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -33,19 +31,10 @@ const LoginPage = () => {
       password: '',
       faildLogin: false,
     },
-    // validationSchema: getScheme.login(Yup),
     onSubmit: async (values) => {
       const { faildLogin, ...data } = values;
-      try {
-        const r = await axios.post(routes.loginPath(), data);
-        localStorage.setItem('userId', JSON.stringify(r.data));
-        auth.logIn();
-        navigate('/', { replace: true });
-      } catch (err) {
-        if (err.response.status === 401) {
-          formik.errors.faildLogin = t('signIn.errors.password');
-        }
-      }
+      const route = routes.loginPath();
+      await makeRequest(route, data, auth, navigate, formik, t);
     },
 
   });
