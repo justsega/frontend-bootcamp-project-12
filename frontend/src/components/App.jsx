@@ -3,41 +3,29 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Navbar, Nav } from 'react-bootstrap';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useTranslation } from 'react-i18next';
 import LoginPage from './loginPage/LoginPage';
 import NotFoundPage from './NotFoundPage';
 import MainChatPage from './MainChatPage';
 import SignUp from './signUp/SignUp';
-import { AuthButton, PrivateRoute } from '../providers/AuthProvider';
+import { PrivateRoute } from '../providers/AuthProvider';
+import NavComponent from './nav/NavComponent';
 import '../style.css';
+import routes from '../routes/routes';
 
-const App = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="d-flex flex-column h-100">
-      <Router>
-        <Navbar expand="lg" bg="white" className="shadow-sm">
-          <Container>
-            <Navbar.Brand as={Link} to="/">{t('mainTitle')}</Navbar.Brand>
-            <Nav className="mr-auto" />
-            <AuthButton />
-          </Container>
-        </Navbar>
-        <Routes>
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/" element={(<PrivateRoute><MainChatPage /></PrivateRoute>)} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
-      </Router>
-
-    </div>
-  );
-};
+const App = () => (
+  <div className="d-flex flex-column h-100">
+    <Router>
+      <NavComponent />
+      <Routes>
+        <Route path={routes.notFoundPage()} element={<NotFoundPage />} />
+        <Route path={routes.mainPage()} element={(<PrivateRoute><MainChatPage /></PrivateRoute>)} />
+        <Route path={routes.loginPage()} element={<LoginPage />} />
+        <Route path={routes.signUpPage()} element={<SignUp />} />
+      </Routes>
+    </Router>
+  </div>
+);
 
 export default App;

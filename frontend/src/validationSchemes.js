@@ -25,9 +25,14 @@ const getScheme = {
       password: Yup.string().trim(),
     })
   ),
-  modalsScheme: (Yup, t) => (
+  modalsScheme: (Yup, t, channels) => (
     Yup.object().shape({
-      channelName: Yup.string().min(3, t('modals.addModal.error')).max(20, t('modals.addModal.error')),
+      channelName: Yup
+        .string()
+        .notOneOf(channels, 'Канал с таким именем уже существует')
+        .min(3, t('modals.errors'))
+        .max(20, t('modals.errors'))
+        .required('Имя канала не должно быть пустым'),
     })
   ),
 

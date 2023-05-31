@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import i18n from 'i18next';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { initReactI18next } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
 import resources from './locales/index';
 import App from './components/App';
 import store from './slices/index';
@@ -13,8 +13,8 @@ import { AuthProvider } from './providers/AuthProvider';
 import { SocketProvider } from './providers/SocketProvider';
 
 const rollbarConfig = {
-  accessToken: 'c4397654be35404586d5b02225fffd87',
-  environment: 'testenv',
+  accessToken: 'ROLLBAR_VAR',
+  environment: 'MY_ENV',
 };
 
 i18n.use(initReactI18next).init({
@@ -32,6 +32,7 @@ root.render(
           <AuthProvider>
             <SocketProvider>
               <App />
+              <ToastContainer />
             </SocketProvider>
           </AuthProvider>
         </Provider>

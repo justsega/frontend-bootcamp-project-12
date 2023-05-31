@@ -2,25 +2,28 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { getAuthHeader } from '../providers/AuthProvider';
 import routes from '../routes/routes';
 import Channels from './channels/Channels';
 import Messages from './messages/Messages';
-// eslint-disable-next-line import/extensions
 import { actions as channelsActions } from '../slices/channelsSlice.js';
-// eslint-disable-next-line import/extensions
 import { actions as messagesActions } from '../slices/messagesSlice.js';
+import toastConfig from '../toastConfig';
 
 const MainChatPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(routes.getData(), { headers: getAuthHeader() });
-      dispatch(channelsActions.addChannels(data.channels));
-      dispatch(channelsActions.activeChannelId(data.currentChannelId));
-      dispatch(messagesActions.addMessages(data.messages));
+      try {
+        const { data } = await axios.get(routes.getData(), { headers: getAuthHeader() });
+        dispatch(channelsActions.addChannels(data.channels));
+        dispatch(channelsActions.activeChannelId(data.currentChannelId));
+        dispatch(messagesActions.addMessages(data.messages));
+      } catch (err) {
+        toast.error('Ошибка авторизации', toastConfig);
+      }
     })();
   }, [dispatch]);
 
@@ -29,7 +32,6 @@ const MainChatPage = () => {
       <Row className="h-100 bg-white flex-md-row">
         <Channels />
         <Messages />
-        <ToastContainer />
       </Row>
     </Container>
 

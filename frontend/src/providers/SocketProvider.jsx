@@ -23,7 +23,6 @@ export const renameChannel = (id, name) => {
   socket.emit('renameChannel', { id, name });
 };
 
-// eslint-disable-next-line react/prop-types
 export const SocketProvider = ({ children }) => {
   const dispatch = useDispatch();
   const messages = useSelector(messagesSelectors.selectAll);

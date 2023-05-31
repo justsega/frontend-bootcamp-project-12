@@ -16,9 +16,9 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn(false);
   };
   const getUserName = () => JSON.parse(localStorage.getItem('userId')).username;
-
+  const setToken = (token) => localStorage.setItem('userId', JSON.stringify(token));
   const memo = useMemo(() => ({
-    loggedIn, logIn, logOut, getUserName,
+    loggedIn, logIn, logOut, getUserName, setToken,
   }));
   return (
     <AuthContext.Provider value={memo}>

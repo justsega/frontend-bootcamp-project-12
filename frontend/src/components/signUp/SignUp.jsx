@@ -6,10 +6,14 @@ import {
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import getScheme from '../../validationSchemes';
 import useAuth from '../../hooks/AuthHook';
 import SignUpForm from './SignUpForm';
-import makeRequest from '../../makeRequest';
+import routes from '../../routes/routes';
+import toastConfig from '../../toastConfig';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
   const { t } = useTranslation();
@@ -23,7 +27,21 @@ const SignUp = () => {
     },
     validationSchema: getScheme.signUp(Yup, t),
     onSubmit: async (values) => {
-      await makeRequest('signUp', values, auth, navigate, formik, t);
+      try {
+        const { username, password } = values;
+        const route = routes.signUp();
+        const r = await axios.post(route, { username, password });
+        auth.setToken(r.data);
+        auth.logIn();
+        navigate('/', { replace: true });
+        console.log(r.data);
+      } catch (err) {
+        if (err.response.status === 409) {
+          formik.errors.confirmPassword = t('signUp.errors.alreadyExist');
+        }
+        toast.error('Ошибка регистрации пользователя', toastConfig);
+        console.log(err);
+      }
     },
   });
   return <RenderSignUp formik={formik} t={t} />;

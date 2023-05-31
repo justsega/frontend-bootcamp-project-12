@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -13,8 +13,11 @@ import MessagesBox from './MessagesBox';
 import MessagesInput from './MessagesInput';
 
 const Messages = () => {
-  filter.loadDictionary('ru');
-  filter.loadDictionary('en');
+  useEffect(() => {
+    filter.loadDictionary('ru');
+    filter.loadDictionary('en');
+  }, []);
+
   const username = useAuth().getUserName();
   const { activeChannelId } = useSelector((state) => state.channels);
   const activeChannel = useSelector(

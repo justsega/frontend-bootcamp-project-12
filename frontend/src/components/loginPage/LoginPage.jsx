@@ -5,9 +5,13 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import useAuth from '../../hooks/AuthHook';
 import LoginPageForm from './LoginPageForm';
-import makeRequest from '../../makeRequest';
+import routes from '../../routes/routes';
+import toastConfig from '../../toastConfig';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -29,7 +33,20 @@ const LoginPage = () => {
       faildLogin: false,
     },
     onSubmit: async (values) => {
-      await makeRequest('loginPath', values, auth, navigate, formik, t);
+      try {
+        const { username, password } = values;
+        const route = routes.loginPath();
+        const r = await axios.post(route, { username, password });
+        auth.logIn(r.data);
+        navigate('/', { replace: true });
+        console.log('Все получилось!');
+      } catch (err) {
+        if (err.response.status === 401) {
+          formik.errors.faildLogin = t('signIn.errors.password');
+        }
+        toast.error('Ошибка авторизации', toastConfig);
+        console.log(err);
+      }
     },
 
   });
