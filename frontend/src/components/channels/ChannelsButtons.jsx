@@ -36,8 +36,8 @@ export const RemovableBtn = ({
         <span className="visually-hidden">{t('channelsPage.dropDown.controlLabel')}</span>
       </Dropdown.Toggle>
       <Dropdown.Menu className="rounded-0">
-        <Dropdown.Item className="remove-dropdown-item" onClick={() => showModal({ type: 'remove', id })}>{t('channelsPage.dropDown.delete')}</Dropdown.Item>
-        <Dropdown.Item className="rename-dropdown-item" onClick={() => showModal({ type: 'rename', id })}>{t('channelsPage.dropDown.rename')}</Dropdown.Item>
+        <Dropdown.Item onClick={() => showModal({ type: 'remove', id })}>{t('channelsPage.dropDown.delete')}</Dropdown.Item>
+        <Dropdown.Item onClick={() => showModal({ type: 'rename', id })}>{t('channelsPage.dropDown.rename')}</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
