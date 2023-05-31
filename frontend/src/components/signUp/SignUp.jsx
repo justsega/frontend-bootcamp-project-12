@@ -29,8 +29,7 @@ const SignUp = () => {
     onSubmit: async (values) => {
       try {
         const { username, password } = values;
-        const route = routes.signUp();
-        const r = await axios.post(route, { username, password });
+        const r = await axios.post(routes.signUp(), { username, password });
         auth.setToken(r.data);
         auth.logIn();
         navigate('/', { replace: true });
