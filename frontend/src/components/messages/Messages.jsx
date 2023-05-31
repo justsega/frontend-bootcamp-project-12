@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Col } from 'react-bootstrap';
 import filter from 'leo-profanity';
+import { toast } from 'react-toastify';
 import { selectors as messagesSelectors } from '../../slices/messagesSlice';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice';
 import useSocket from '../../hooks/SocketHook';
@@ -11,6 +12,7 @@ import useAuth from '../../hooks/AuthHook';
 import MessagesHeader from './MessagesHeader';
 import MessagesBox from './MessagesBox';
 import MessagesInput from './MessagesInput';
+import toastConfig from '../../toastConfig';
 
 const Messages = () => {
   useEffect(() => {
@@ -32,8 +34,12 @@ const Messages = () => {
       message: '',
     },
     onSubmit: (values) => {
-      socket.addMessage(filter.clean(values.message), activeChannelId, username);
-      formik.resetForm();
+      try {
+        socket.addMessage(filter.clean(values.message), activeChannelId, username);
+        formik.resetForm();
+      } catch (err) {
+        toast.error('Не удалось отправить сообщение', toastConfig);
+      }
     },
   });
   return (

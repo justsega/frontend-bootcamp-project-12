@@ -1,7 +1,6 @@
 import { React, useState, useMemo } from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/AuthHook';
 import AuthContext from '../contexts/AuthContext';

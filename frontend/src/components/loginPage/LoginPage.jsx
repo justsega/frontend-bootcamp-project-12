@@ -37,9 +37,9 @@ const LoginPage = () => {
         const { username, password } = values;
         const route = routes.loginPath();
         const r = await axios.post(route, { username, password });
-        auth.logIn(r.data);
+        auth.setToken(r.data);
+        auth.logIn();
         navigate('/', { replace: true });
-        console.log('Все получилось!');
       } catch (err) {
         if (err.response.status === 401) {
           formik.errors.faildLogin = t('signIn.errors.password');
