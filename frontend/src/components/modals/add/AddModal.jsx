@@ -50,7 +50,7 @@ const AddModal = (props) => {
           <Form.Control
             ref={inputField}
             type="text"
-            autoComplete="false"
+            autoComplete="off"
             isInvalid={formik.errors.channelName && formik.touched.channelName}
             name="channelName"
             id="channelName"

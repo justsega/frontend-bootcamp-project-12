@@ -49,7 +49,7 @@ const RenameModal = ({ show, closeModal, id }) => {
       <Modal.Body>
         <Form>
           <Form.Control
-            autoComplete="false"
+            autoComplete="off"
             isInvalid={formik.errors.channelName}
             name="channelName"
             id="channelName"
