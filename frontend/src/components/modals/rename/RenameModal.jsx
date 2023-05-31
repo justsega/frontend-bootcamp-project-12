@@ -28,12 +28,15 @@ const RenameModal = ({ show, closeModal, id }) => {
     validationSchema: getScheme.modalsScheme(Yup, t, channelsNames),
     onSubmit: (values) => {
       try {
-        toast.success(t('toast.renamed'), toastConfig);
+        if (values.channelName.length === 0) {
+          throw new Error('Не должно быть пустым');
+        }
         socket.renameChannel(id, values.channelName);
+        toast.success(t('toast.renamed'), toastConfig);
         formik.resetForm();
         closeModal();
       } catch (err) {
-        toast.error('Не удалось переименовать канал', toastConfig);
+        toast.error(err.message, toastConfig);
       }
     },
   });

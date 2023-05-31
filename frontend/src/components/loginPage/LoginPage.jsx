@@ -44,8 +44,7 @@ const LoginPage = () => {
         if (err.response.status === 401) {
           formik.errors.faildLogin = t('signIn.errors.password');
         }
-        toast.error('Ошибка авторизации', toastConfig);
-        console.log(err);
+        toast.error(formik.errors.faildLogin, toastConfig);
       }
     },
 

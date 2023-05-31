@@ -35,10 +35,13 @@ const Messages = () => {
     },
     onSubmit: (values) => {
       try {
+        if (values.message.length === 0) {
+          throw new Error('Не должно быть пустым');
+        }
         socket.addMessage(filter.clean(values.message), activeChannelId, username);
         formik.resetForm();
       } catch (err) {
-        toast.error('Не удалось отправить сообщение', toastConfig);
+        toast.error(err.message, toastConfig);
       }
     },
   });

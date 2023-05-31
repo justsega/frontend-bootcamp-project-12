@@ -34,13 +34,11 @@ const SignUp = () => {
         auth.setToken(r.data);
         auth.logIn();
         navigate('/', { replace: true });
-        console.log(r.data);
       } catch (err) {
         if (err.response.status === 409) {
           formik.errors.confirmPassword = t('signUp.errors.alreadyExist');
         }
-        toast.error('Ошибка регистрации пользователя', toastConfig);
-        console.log(err);
+        toast.error(formik.errors.confirmPassword, toastConfig);
       }
     },
   });

@@ -27,13 +27,16 @@ const AddModal = (props) => {
     validationSchema: getScheme.modalsScheme(Yup, t, channelsNames),
     onSubmit: (values) => {
       try {
+        if (values.channelName.length === 0) {
+          throw new Error('Не должно быть пустым');
+        }
         socket.addChannel(values.channelName);
         toast.success(t('toast.added'), toastConfig);
         formik.resetForm();
         closeModal();
       } catch (err) {
-        err.message = 'Не удалось добавить канал';
         toast.error(err.message, toastConfig);
+        inputField.current.focus();
       }
     },
   });
