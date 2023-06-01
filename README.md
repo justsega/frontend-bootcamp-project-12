@@ -17,7 +17,12 @@
 
 ```
 $ git clone https://github.com/justsega/frontend-bootcamp-project-12.git
+$ cd frontend-bootcamp-project-12
 $ npm ci
 ```
+
+### Скриншоты
+
+![ScreenShot](https://cdn2.hexlet.io/derivations/image/original/eyJpZCI6ImVhZmZhMmE3YjVjMDUwMGIwZWFjMWJhZDMzZmU4Y2M4LnBuZyIsInN0b3JhZ2UiOiJjYWNoZSJ9?signature=64cf2457b4236edb00bc7357051c6bfc466f26aaf9b3197831f004b769e07726)
 
 [Demo](https://frontend-bootcamp-project-12-production-7bb5.up.railway.app/)
