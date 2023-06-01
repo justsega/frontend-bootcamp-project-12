@@ -19,7 +19,6 @@ const MainChatPage = () => {
       try {
         const { data } = await axios.get(routes.getData(), { headers: getAuthHeader() });
         dispatch(channelsActions.addChannels(data.channels));
-        dispatch(channelsActions.activeChannelId(data.currentChannelId));
         dispatch(messagesActions.addMessages(data.messages));
       } catch (err) {
         toast.error('Ошибка авторизации', toastConfig);

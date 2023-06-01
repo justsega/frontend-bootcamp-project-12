@@ -19,7 +19,7 @@ const RemoveModal = (props) => {
     try {
       socket.removeChannel(id);
       if (id === currentId) {
-        dispatch(channelsActions.activeChannelId(1));
+        dispatch(channelsActions.setActiveChannelId(1));
       }
       closeModal();
       toast.success(t('toast.removed'), toastConfig);

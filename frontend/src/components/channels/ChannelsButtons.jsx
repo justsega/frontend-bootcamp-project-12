@@ -2,30 +2,31 @@ import { Button, Dropdown, ButtonGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { actions as modalActions } from '../../slices/modalSlice';
+import { actions as channelsActions } from '../../slices/channelsSlice';
 
-export const UnRemovableBtn = ({
-  name, setCurrChannel, id, variant,
-}) => (
-  <Button
-    type="button"
-    variant={variant}
-    onClick={() => setCurrChannel(id)}
-    className="text-truncate w-100 rounded-0 text-start"
-  >
-    <span className="me-1">#</span>
-    {name}
-  </Button>
-);
-
-export const RemovableBtn = ({
-  variant, setCurrChannel, id, name,
-}) => {
-  const { t } = useTranslation();
+export const UnRemovableBtn = ({ name, id, variant }) => {
   const dispatch = useDispatch();
+  const setActiveChannelId = (channelId) => dispatch(channelsActions.setActiveChannelId(channelId));
+  return (
+    <Button
+      type="button"
+      variant={variant}
+      onClick={() => setActiveChannelId(id)}
+      className="text-truncate w-100 rounded-0 text-start"
+    >
+      <span className="me-1">#</span>
+      {name}
+    </Button>
+  );
+};
+
+export const RemovableBtn = ({ name, id, variant }) => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const showModal = (payload) => dispatch(modalActions.showModal(payload));
   return (
     <Dropdown as={ButtonGroup} className="d-flex">
-      <UnRemovableBtn name={name} variant={variant} setCurrChannel={setCurrChannel} id={id}>
+      <UnRemovableBtn name={name} variant={variant} id={id}>
         {name}
       </UnRemovableBtn>
       <Dropdown.Toggle

@@ -7,30 +7,12 @@ import { selectors as messagesSelectors, actions as messagesActions } from '../s
 
 const socket = io();
 
-export const addChannel = (name) => {
-  socket.emit('newChannel', { name });
-};
-
-export const removeChannel = (id) => {
-  socket.emit('removeChannel', { id });
-};
-
-export const addMessage = (body, channelId, username) => {
-  socket.emit('newMessage', { body, channelId, username });
-};
-
-export const renameChannel = (id, name) => {
-  socket.emit('renameChannel', { id, name });
-};
-
 export const SocketProvider = ({ children }) => {
   const dispatch = useDispatch();
   const messages = useSelector(messagesSelectors.selectAll);
 
   socket.on('newChannel', (payload) => {
-    const { id } = payload;
     dispatch(channelsActions.addChannel(payload));
-    dispatch(channelsActions.activeChannelId(id));
   });
 
   socket.on('removeChannel', (payload) => {
@@ -51,6 +33,26 @@ export const SocketProvider = ({ children }) => {
     dispatch(channelsActions.updateChannel({ id, changes: { name } }));
   });
 
+  const addChannel = (name) => {
+    socket.emit('newChannel', { name }, (response) => {
+      if (response.status === 'ok') {
+        dispatch(channelsActions.setActiveChannelId(response.data.id));
+      }
+    });
+  };
+
+  const removeChannel = (id) => {
+    socket.emit('removeChannel', { id });
+  };
+
+  const addMessage = (body, channelId, username) => {
+    socket.emit('newMessage', { body, channelId, username });
+  };
+
+  const renameChannel = (id, name) => {
+    socket.emit('renameChannel', { id, name });
+  };
+
   const memo = useMemo(() => ({
     addChannel, removeChannel, addMessage, renameChannel,
   }));
@@ -61,3 +63,5 @@ export const SocketProvider = ({ children }) => {
     </SocketContext.Provider>
   );
 };
+
+export default SocketProvider;

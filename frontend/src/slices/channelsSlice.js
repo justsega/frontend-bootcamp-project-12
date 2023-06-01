@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 const channelsAdapter = createEntityAdapter();
@@ -14,17 +15,13 @@ const channelsSlice = createSlice({
     removeChannel: (state, { payload }) => {
       channelsAdapter.removeOne(state, payload);
       if (state.activeChannelId === payload) {
-        // eslint-disable-next-line no-param-reassign
         state.activeChannelId = 1;
       }
     },
     updateChannel: channelsAdapter.updateOne,
-    activeChannelId: (state, { payload }) => {
-      // eslint-disable-next-line no-param-reassign
+    setActiveChannelId: (state, { payload }) => {
       state.activeChannelId = payload;
     },
-    getActiveChannelName: channelsAdapter.selectId,
-
   },
 });
 
