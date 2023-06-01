@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const MessagesBox = ({ messages }) => {
+  const messagesBox = useRef();
   useEffect(() => {
-    const messagesBox = document.getElementById('messages-box');
-    messagesBox.scrollTop = messagesBox.scrollHeight;
-  });
+    messagesBox.current.scrollTop = messagesBox.current.scrollHeight;
+  }, [messages]);
   return (
-    <div id="messages-box" className="chat-messages scroll-down px-5 ">
+    <div id="messages-box" ref={messagesBox} className="chat-messages overflow-auto px-5 ">
       {messages.map((message) => (
         <div key={message.id} className="text-break mb-2">
           <b>{message.username}</b>
           :
-          {' '}
+          &nbsp;
           {message.body}
         </div>
       ))}
