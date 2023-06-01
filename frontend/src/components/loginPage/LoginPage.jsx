@@ -22,7 +22,7 @@ const LoginPage = () => {
       (() => {
         if (auth.checkToken()) {
           auth.logIn();
-          navigate('/', { replace: true });
+          navigate(routes.mainPage(), { replace: true });
         }
       })();
     };
