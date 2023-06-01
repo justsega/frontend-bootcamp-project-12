@@ -18,7 +18,6 @@ const rollbarConfig = {
 };
 
 i18n.use(initReactI18next).init({
-  debug: true,
   lng: 'ru',
   resources,
 });

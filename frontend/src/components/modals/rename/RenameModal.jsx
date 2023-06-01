@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -12,9 +12,9 @@ import getScheme from '../../../validationSchemes';
 import useSocket from '../../../hooks/SocketHook';
 
 const RenameModal = ({ show, closeModal, id }) => {
+  const inputField = useRef();
   useEffect(() => {
-    const inputField = document.getElementById('channelName');
-    inputField.select();
+    inputField.current.select();
   }, []);
 
   const { t } = useTranslation();
@@ -49,6 +49,7 @@ const RenameModal = ({ show, closeModal, id }) => {
       <Modal.Body>
         <Form>
           <Form.Control
+            ref={inputField}
             autoComplete="off"
             isInvalid={formik.errors.channelName}
             name="channelName"
