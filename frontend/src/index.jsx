@@ -13,8 +13,8 @@ import { AuthProvider } from './providers/AuthProvider';
 import { SocketProvider } from './providers/SocketProvider';
 
 const rollbarConfig = {
-  accessToken: 'ROLLBAR_VAR',
-  environment: 'MY_ENV',
+  accessToken: process.env.ROLLBAR_KEY,
+  environment: process.env.ROLLBAR_ENV,
 };
 
 i18n.use(initReactI18next).init({
