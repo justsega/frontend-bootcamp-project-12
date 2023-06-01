@@ -41,10 +41,12 @@ export default {
 
     },
     messagesPage: {
+      error: 'Не должно быть пустым',
       inputPlaceholder: 'Введите сообщение...',
       sendBtn: 'Отправить',
     },
     modals: {
+      notToBeEmpty: 'Не должно быть пустым',
       errors: 'От 3 до 20 символов',
       addModal: {
         title: 'Добавить канал',
@@ -69,6 +71,8 @@ export default {
       added: 'Канал создан',
       removed: 'Канал удалён',
       renamed: 'Канал переименован',
+      removeError: 'Не удалось удалить канал',
+      authError: 'Ошибка авторизации',
     },
     notFoundPage: {
       title1: 'Страница не найдена',

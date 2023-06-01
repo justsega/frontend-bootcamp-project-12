@@ -19,7 +19,7 @@ const Messages = () => {
     filter.loadDictionary('ru');
     filter.loadDictionary('en');
   }, []);
-
+  const { t } = useTranslation();
   const username = useAuth().getUserName();
   const { activeChannelId } = useSelector((state) => state.channels);
   const activeChannel = useSelector(
@@ -36,7 +36,7 @@ const Messages = () => {
     onSubmit: (values) => {
       try {
         if (values.message.length === 0) {
-          throw new Error('Не должно быть пустым');
+          throw new Error(t('messagesPage.error'));
         }
         socket.addMessage(filter.clean(values.message), activeChannelId, username);
         formik.resetForm();

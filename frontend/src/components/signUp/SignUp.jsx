@@ -32,7 +32,7 @@ const SignUp = () => {
         const r = await axios.post(routes.signUp(), { username, password });
         auth.setToken(r.data);
         auth.logIn();
-        navigate('/', { replace: true });
+        navigate(routes.mainPage(), { replace: true });
       } catch (err) {
         if (err.response.status === 409) {
           formik.errors.confirmPassword = t('signUp.errors.alreadyExist');

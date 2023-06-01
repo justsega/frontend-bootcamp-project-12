@@ -24,7 +24,7 @@ const RemoveModal = (props) => {
       closeModal();
       toast.success(t('toast.removed'), toastConfig);
     } catch (err) {
-      toast.error('Не удалось удалить канал', toastConfig);
+      toast.error(t('toast.removeError'), toastConfig);
     }
   };
   const removeBtn = useRef();

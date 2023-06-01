@@ -29,7 +29,7 @@ const RenameModal = ({ show, closeModal, id }) => {
     onSubmit: (values) => {
       try {
         if (values.channelName.length === 0) {
-          throw new Error('Не должно быть пустым');
+          throw new Error(t('modals.notToBeEmpty'));
         }
         socket.renameChannel(id, values.channelName);
         toast.success(t('toast.renamed'), toastConfig);

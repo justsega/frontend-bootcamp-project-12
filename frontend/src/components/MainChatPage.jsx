@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { getAuthHeader } from '../providers/AuthProvider';
 import routes from '../routes/routes';
 import Channels from './channels/Channels';
@@ -12,6 +13,7 @@ import { actions as messagesActions } from '../slices/messagesSlice.js';
 import toastConfig from '../toastConfig';
 
 const MainChatPage = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const MainChatPage = () => {
         dispatch(channelsActions.addChannels(data.channels));
         dispatch(messagesActions.addMessages(data.messages));
       } catch (err) {
-        toast.error('Ошибка авторизации', toastConfig);
+        toast.error(t('toast.authError'), toastConfig);
       }
     })();
   }, [dispatch]);

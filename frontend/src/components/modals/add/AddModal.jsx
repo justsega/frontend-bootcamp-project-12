@@ -28,7 +28,7 @@ const AddModal = (props) => {
     onSubmit: (values) => {
       try {
         if (values.channelName.length === 0) {
-          throw new Error('Не должно быть пустым');
+          throw new Error(t('modals.notToBeEmpty'));
         }
         socket.addChannel(values.channelName);
         toast.success(t('toast.added'), toastConfig);
