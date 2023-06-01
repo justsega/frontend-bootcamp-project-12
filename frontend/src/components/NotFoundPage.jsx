@@ -8,12 +8,11 @@ const NotFoundPage = () => {
   const auth = useAuth();
   const { t } = useTranslation();
   useEffect(() => {
-    const checkAuth = () => {
-      if (localStorage.getItem('userId')) {
+    (() => {
+      if (auth.checkToken()) {
         auth.logIn();
       }
-    };
-    checkAuth();
+    })();
   }, [auth]);
   return (
     <div className="text-center">

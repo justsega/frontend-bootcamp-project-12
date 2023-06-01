@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/AuthHook';
 import AuthContext from '../contexts/AuthContext';
 
-// eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -15,9 +14,16 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn(false);
   };
   const getUserName = () => JSON.parse(localStorage.getItem('userId')).username;
+  const checkToken = () => {
+    const token = JSON.parse(localStorage.getItem('userId')) ?? null;
+    if (token) {
+      return true;
+    }
+    return false;
+  };
   const setToken = (token) => localStorage.setItem('userId', JSON.stringify(token));
   const memo = useMemo(() => ({
-    loggedIn, logIn, logOut, getUserName, setToken,
+    loggedIn, logIn, logOut, getUserName, setToken, checkToken,
   }));
   return (
     <AuthContext.Provider value={memo}>

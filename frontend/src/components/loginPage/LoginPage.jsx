@@ -19,10 +19,12 @@ const LoginPage = () => {
   const auth = useAuth();
   useEffect(() => {
     const checkAuth = () => {
-      if (localStorage.getItem('userId')) {
-        auth.logIn();
-        navigate('/', { replace: true });
-      }
+      (() => {
+        if (auth.checkToken()) {
+          auth.logIn();
+          navigate('/', { replace: true });
+        }
+      })();
     };
     checkAuth();
   }, [auth, navigate]);
