@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/AuthHook';
 import AuthContext from '../contexts/AuthContext';
+import routes from '../routes/routes';
 
 export const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -48,7 +49,7 @@ export const PrivateRoute = ({ children }) => {
   const location = useLocation();
 
   return (
-    auth.loggedIn ? children : <Navigate to="/login" state={{ from: location }} />
+    auth.loggedIn ? children : <Navigate to={routes.loginPage()} state={{ from: location }} />
   );
 };
 
