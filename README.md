@@ -10,7 +10,10 @@
 * Redux (через reduxjs/toolkit), 
 * организация роутинга на клиенте - React Router v6, 
 * авторизация и аутентификация,
-* react-bootstrap,
+* внешний вид с помощью react-bootstrap,
+* интернационализация - react-18next,
+* фильтрация сообщений через leo-profanity,
+* коллектор ошибок Rollbar,
 * сборка с webpack.
 
 ### Установка проекта:
