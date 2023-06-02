@@ -43,7 +43,6 @@ export const AuthButton = () => {
   );
 };
 
-// eslint-disable-next-line react/prop-types
 export const PrivateRoute = ({ children }) => {
   const auth = useAuth();
   const location = useLocation();

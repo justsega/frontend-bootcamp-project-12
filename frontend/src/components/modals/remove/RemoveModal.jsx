@@ -14,15 +14,17 @@ const RemoveModal = (props) => {
   const dispatch = useDispatch();
   const socket = useSocket();
   const currentId = useSelector((state) => state.channels.activeChannelId);
+  const callback = () => {
+    toast.success(t('toast.removed'), toastConfig);
+    closeModal();
+  };
   // eslint-disable-next-line no-shadow
   const handleRemove = (id) => {
     try {
-      socket.removeChannel(id);
+      socket.removeChannel(id, callback);
       if (id === currentId) {
         dispatch(channelsActions.setActiveChannelId(1));
       }
-      closeModal();
-      toast.success(t('toast.removed'), toastConfig);
     } catch (err) {
       toast.error(t('toast.removeError'), toastConfig);
     }

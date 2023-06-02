@@ -4,12 +4,12 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Modal, Form, Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useSocket from '../../../hooks/SocketHook';
 import 'react-toastify/dist/ReactToastify.css';
 import toastConfig from '../../../toastConfig';
 import getScheme from '../../../validationSchemes';
-import { selectors as channelsSelectors } from '../../../slices/channelsSlice';
+import { selectors as channelsSelectors, actions as channelsActions } from '../../../slices/channelsSlice';
 
 const AddModal = (props) => {
   const { closeModal, show } = props;
@@ -17,9 +17,17 @@ const AddModal = (props) => {
   useEffect(() => {
     inputField.current.focus();
   }, []);
+
   const channelsNames = useSelector(channelsSelectors.selectAll).map((channel) => channel.name);
   const { t } = useTranslation();
   const socket = useSocket();
+  const dispatch = useDispatch();
+  // eslint-disable-next-line no-shadow
+  const callback = (channelId) => {
+    dispatch(channelsActions.setActiveChannelId(channelId));
+    toast.success(t('toast.added'), toastConfig);
+    closeModal();
+  };
   const formik = useFormik({
     initialValues: {
       channelName: '',
@@ -30,12 +38,10 @@ const AddModal = (props) => {
         if (values.channelName.length === 0) {
           throw new Error(t('modals.notToBeEmpty'));
         }
-        socket.addChannel(values.channelName);
-        toast.success(t('toast.added'), toastConfig);
+        socket.addChannel(values.channelName, callback);
         formik.resetForm();
-        closeModal();
       } catch (err) {
-        toast.error(err.message, toastConfig);
+        toast.error(formik.errors.channelName, toastConfig);
         inputField.current.focus();
       }
     },

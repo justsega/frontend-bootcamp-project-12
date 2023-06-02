@@ -11,10 +11,12 @@ import Messages from './messages/Messages';
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import { actions as messagesActions } from '../slices/messagesSlice.js';
 import toastConfig from '../toastConfig';
+import useAuth from '../hooks/AuthHook';
 
 const MainChatPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const auth = useAuth();
 
   useEffect(() => {
     (async () => {
@@ -23,7 +25,12 @@ const MainChatPage = () => {
         dispatch(channelsActions.addChannels(data.channels));
         dispatch(messagesActions.addMessages(data.messages));
       } catch (err) {
-        toast.error(t('toast.authError'), toastConfig);
+        if (err.response.status === 401) {
+          toast.error(t('toast.authError'), toastConfig);
+          auth.logOut();
+        } else {
+          toast.error(t('toast.networkError'), toastConfig);
+        }
       }
     })();
   }, [dispatch]);

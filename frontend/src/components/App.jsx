@@ -5,6 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import LoginPage from './loginPage/LoginPage';
 import NotFoundPage from './NotFoundPage';
 import MainChatPage from './MainChatPage';
@@ -20,7 +21,10 @@ const App = () => (
       <NavComponent />
       <Routes>
         <Route path={routes.notFoundPage()} element={<NotFoundPage />} />
-        <Route path={routes.mainPage()} element={(<PrivateRoute><MainChatPage /></PrivateRoute>)} />
+        <Route
+          path={routes.mainPage()}
+          element={(<PrivateRoute><MainChatPage /></PrivateRoute>)}
+        />
         <Route path={routes.loginPage()} element={<LoginPage />} />
         <Route path={routes.signUpPage()} element={<SignUp />} />
       </Routes>

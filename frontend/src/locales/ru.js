@@ -73,6 +73,7 @@ export default {
       renamed: 'Канал переименован',
       removeError: 'Не удалось удалить канал',
       authError: 'Ошибка авторизации',
+      networkError: 'Ошибка сети',
     },
     notFoundPage: {
       title1: 'Страница не найдена',

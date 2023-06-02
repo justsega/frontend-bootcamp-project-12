@@ -33,24 +33,36 @@ export const SocketProvider = ({ children }) => {
     dispatch(channelsActions.updateChannel({ id, changes: { name } }));
   });
 
-  const addChannel = (name) => {
+  const addChannel = (name, callback) => {
     socket.emit('newChannel', { name }, (response) => {
       if (response.status === 'ok') {
-        dispatch(channelsActions.setActiveChannelId(response.data.id));
+        callback(response.data.id);
       }
     });
   };
 
-  const removeChannel = (id) => {
-    socket.emit('removeChannel', { id });
+  const removeChannel = (id, callback) => {
+    socket.emit('removeChannel', { id }, (response) => {
+      if (response.status === 'ok') {
+        callback();
+      }
+    });
   };
 
-  const addMessage = (body, channelId, username) => {
-    socket.emit('newMessage', { body, channelId, username });
+  const addMessage = (body, channelId, username, callback) => {
+    socket.emit('newMessage', { body, channelId, username }, (response) => {
+      if (response.status === 'ok') {
+        callback();
+      }
+    });
   };
 
-  const renameChannel = (id, name) => {
-    socket.emit('renameChannel', { id, name });
+  const renameChannel = (id, name, callback) => {
+    socket.emit('renameChannel', { id, name }, (response) => {
+      if (response.status === 'ok') {
+        callback();
+      }
+    });
   };
 
   const memo = useMemo(() => ({

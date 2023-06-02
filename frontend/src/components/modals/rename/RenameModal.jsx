@@ -21,6 +21,10 @@ const RenameModal = ({ show, closeModal, id }) => {
   const channelToRename = useSelector(selectors.selectAll).find((channel) => channel.id === id);
   const channelsNames = useSelector(channelsSelectors.selectAll).map((channel) => channel.name);
   const socket = useSocket();
+  const callback = () => {
+    toast.success(t('toast.renamed'), toastConfig);
+    closeModal();
+  };
   const formik = useFormik({
     initialValues: {
       channelName: channelToRename.name,
@@ -31,10 +35,8 @@ const RenameModal = ({ show, closeModal, id }) => {
         if (values.channelName.length === 0) {
           throw new Error(t('modals.notToBeEmpty'));
         }
-        socket.renameChannel(id, values.channelName);
-        toast.success(t('toast.renamed'), toastConfig);
+        socket.renameChannel(id, values.channelName, callback);
         formik.resetForm();
-        closeModal();
       } catch (err) {
         toast.error(err.message, toastConfig);
       }
